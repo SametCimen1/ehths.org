@@ -97,6 +97,48 @@ CREATE TABLE comments(
   postid integer 
 );
 
+CREATE TABLE clubs(
+    id SERIAL PRIMARY KEY,
+    name varchar(250),
+    description varchar(500),
+    picture varchar(500),
+    memberCount integer,
+    website varchar(500)
+);
+
+CREATE TABLE members(
+    id SERIAL PRIMARY KEY,
+    userid integer REFERENCES users(id),
+    clubid integer REFERENCES clubs(id)
+);
+
+CREATE TABLE events(
+    id SERIAL PRIMARY KEY,
+    clubid integer REFERENCES clubs(id),
+    header varchar(2500),
+    date date,
+    club varchar(250),
+    description varchar (2500)
+);
+
+CREATE TABLE signups(
+    id SERIAL PRIMARY KEY,
+    eventid integer REFERENCES events(id),
+    userid integer REFERENCES users(id),
+    clubid integer REFERENCES clubs(id),
+    header varchar(2500),
+    description varchar (2500)
+);
+
+
+INSERT INTO events(clubid, header, description) VALUES (1, '10/08/22 Funny Farm Rescue Fall Festival Shift 1', 'Description: Volunteers will be engaging in farm clean up which will consist of raking leaves and sticks, wiping tables down, cleaning up poop etc.');
+
+UPDATE users SET add_id = 'cimenm207@eht.k12.nj.us' WHERE id = 1;
+
+
+INSERT INTO clubs(name, description, picture, memberCount) VALUES('Key Club', 'Division 2 of the New Jersey district of Key Club International, a student-led organization providing members with opportunities to provide service, build character, and develop leadership', 'https://www.ehtkeyclub.com/static/img/keyclublogo.png', 0);
+INSERT INTO clubs(name, description, picture, memberCount) VALUES('FBLA', 'FBLA is an organization that helps expose students to the business world. High schools all around the world are “chapters” of this organization and participate in conferences, competitions, and more. ', 'https://rhsfbladeca.weebly.com/uploads/8/4/4/4/84448584/fbla-logo.png?129', 0);
+
 
 
 INSERT INTO groupposts VALUES (1,1,'computer science',23,'test', 'hello this is a test post', '2022-01-04 15:50:01', ARRAY[]::integer[], ARRAY[]::integer[], 0, 0);
@@ -120,7 +162,7 @@ CREATE TABLE groupposts(
 INSERT INTO groups(groupName, members, groupTitle, groupDescription, postsid, groupimage, createdby) VALUES ('pre calc', ARRAY[]::integer[], 'we are a community that"s purpose is to gatheownship High School.', 'I hope this lengthy question makes sense. Essentially, Ild imultaneously (ea levels in h', ARRAY[]::integer[], 'fszbbkbwyceagle.png', 20);
 
 
-INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests) VALUES('wenbin@eht.k12.nj.us', 'Samet123', 'user', true,' ', 'Wenbin Yang', ARRAY[]::integer[], 'wenbin1234', '', false, '', ARRAY[]::integer[]);
+INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests) VALUES('shao@eht.k12.nj.us', 'Samet123', 'admin', true,' ', 'Shao Yang', ARRAY[]::integer[], 'shao@eht.k12.nj.us', '', false, '', ARRAY[]::integer[]);
 UPDATE users SET friends = array_append(friends, 5)
 
 ALTER TABLE users
@@ -133,9 +175,6 @@ UPDATE users SET friendrequests =   array_append(friendrequests, 20) WHERE id = 
 
 UPDATE users SET friends =   array_append(friends, 20) WHERE id = 2;
 UPDATE users SET friends =   array_remove(friends, 23) WHERE id = 20;
-
-
-
 
 
 

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import TrophySVG from '../svgs/TrophySVG';
 
 const Layout = ({children}) => {
 
@@ -18,7 +19,7 @@ const Layout = ({children}) => {
         credentials: 'include',
       });
       const response = await data.json();
-      console.log("RESS", response)
+      console.log("RESSPONSE COMING", response)
       setUser(response);
       if(response === undefined){
         setIsLoggedIn(false)
@@ -37,7 +38,6 @@ const Layout = ({children}) => {
               'Content-Type': 'application/json'
             },
             redirect: 'follow',
-            credentials: 'include',
         })
         const response = await data.json();
         if(response === true){
@@ -57,9 +57,13 @@ const Layout = ({children}) => {
           localStorage.setItem('theme', "light")
           setTheme("light")
         }
-        getAuth();
+        getRealUserData();
       }, [])
   
+
+      useEffect(() => {
+        console.log("CAHNGE IN USER", user)
+      },[user])
         
   const  changeTheme = (theme) => {
     localStorage.setItem('theme', theme);
@@ -143,7 +147,13 @@ const Layout = ({children}) => {
                   } 
                   </div>}
 
-                  {loggedIn && <a className = "text-white nav-link " href >Ayarlar</a>}
+                  {loggedIn && 
+                    <div className='flex items-center justify-center'> 
+                      <TrophySVG></TrophySVG>
+                      <a className = "text-white nav-link " href >321</a>
+                    </div> 
+                    
+                  }
                   
 
  

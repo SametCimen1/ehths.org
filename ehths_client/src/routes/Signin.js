@@ -10,7 +10,8 @@ export default function Signin() {
     const [password, setPassword] = useState("");
     const [response, setResponse] = useState("");
 
-    const submitForm = async() => {
+    const submitForm = async(e) => {
+        e.preventDefault()
         console.log("CALLED")
         setResponse("Sending...")
         const data = await fetch("http://localhost:5000/auth/signin",{

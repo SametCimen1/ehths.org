@@ -8,10 +8,13 @@ const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 dotenv.config();
 
+
 router.post('/getUser', async(req,res) => {
     const user = req.user;
+    console.log(user)
     if(user){
-        const data = await pool.query("SELECT add_id, name, email, ownimg, image, about FROM users WHERE id = $1", [user._id]);
+        const data = await pool.query("SELECT add_id, name, email, ownimg, image, role FROM users WHERE id = $1", [user._id]);
+        console.log("USER EXIST SENDING", data.rows[0])
         return res.status(200).json(data.rows[0]);
     }
     else{
@@ -1001,7 +1004,7 @@ router.post('/groupmakepost', async(req,res) => {
             const seconds = dateObj.getSeconds();
             const minutes = dateObj.getMinutes();
             const hour = dateObj.getHours();
-            const currentTime = `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`
+            const currpentTime = `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`
             const data = await pool.query("INSERT INTO groupposts(groupid, groupname, userid, title, text, uploadtime, commentby,likedby, likes, comments) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)", [req.body.id, req.body.name,req.user._id, req.body.title, req.body.text, currentTime, [], [], 0,0])
             return res.status(200).json("ok")
         }
@@ -1039,6 +1042,7 @@ router.post('/getgroupposts', async(req,res) => {
         return res.status(500).json(error)
     }
 })
+
 
 
 module.exports = router;

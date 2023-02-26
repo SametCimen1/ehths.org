@@ -15,21 +15,6 @@ router.post('/signup', async(req,res) => {
             if((password === passwordAgain) && password.length > 6){
                 const isItUsed = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
                     // if(isItUsed.rowCount === 0){
-                            console.log(name)
-            
-                            let add_id = "";
-                            for(let i = 0; i<4; i++){
-                                const randomNumber = Math.floor(Math.random()*10);
-                                console.log(randomNumber)
-                                add_id += Math.floor(Math.random() * 10);
-                                
-                            }
-                            const assignedName = "Afnan Habib";
-                            add_id = assignedName.replaceAll(" ", "").toLowerCase() +  add_id;
-                            console.log("ADD ID")
-                            console.log(add_id)    
-
-
 
                             const sentEmail = async() => {
                                 
@@ -39,7 +24,7 @@ router.post('/signup', async(req,res) => {
                                 // const lowerCaseName = assignedName.toLowerCase();
                                 
 
-                                const makeUser = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12)",[email, hashPassword, 'user',true, '', assignedName, [], add_id,'', false, '', []])
+                                const makeUser = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12)",[email, hashPassword, 'user',true, '', assignedName, [], email,'', false, '', []])
                                 return res.status(200).json("sent a verification link to your email. Please check it")
                             }
 
@@ -152,7 +137,9 @@ router.post('/signup', async(req,res) => {
 
 router.post('/signin', async(req,res) => {
     const {email, password} = req.body;
+    console.log('pass',password)
     const getUser = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    console.log('pass',getUser.rows[0])
     if(getUser.rowCount === 0){
        return res.status(404).json("user doesnt exist")
     }
@@ -160,6 +147,7 @@ router.post('/signin', async(req,res) => {
         // user exist;
        const validPassword = await bcrypt.compare(password, getUser.rows[0].password);
        if(validPassword){
+        console.log("PASS VALED")
           if(getUser.rows[0].active){
         
             const token = jwt.sign({_id: getUser.rows[0].id, email: getUser.rows[0].email, name: getUser.rows[0].name}, process.env.TOKENSECRET, {expiresIn: "3day"});

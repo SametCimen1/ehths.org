@@ -5,7 +5,7 @@ import 'react-slideshow-image/dist/styles.css';
 
 import SignupSVG from '../svgs/SignupSVG';
 import Footer from '../components/Footer'
-import { useNavigate  } from "react-router-dom";
+import { useNavigate, Link  } from "react-router-dom";
 
 const Home = () => {
     let navigate  = useNavigate();
@@ -15,11 +15,13 @@ const Home = () => {
         "slide2.jpg",
         "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
     ];
+    const [events, setEvents] = useState([])
 
     
    
     useEffect(()=>{
      getUser();
+     getEvents();
     },[])
     
     const getUser = async () => {
@@ -35,8 +37,22 @@ const Home = () => {
         if(response === true){
             navigate('/dashboard')
         }
-
     }
+
+    const getEvents = async() => {
+        const data = await fetch("http://localhost:5000/getCurrentEvents", {
+            method:"POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+        })
+        const res = await data.json();
+        console.log("RESSSDSADA", res)
+        setEvents(res)
+    }
+
 
     return (
         
@@ -72,31 +88,31 @@ const Home = () => {
             {/*card section */}
             <div className='flex justify-between'>
                 <div class="max-w-sm rounded overflow-hidden shadow-lg mt-2">
-                    <img class="w-full" src="slide1.png" alt="Sunset in the mountains" />
+                    <img class="w-full" src="eventPIC.jpg" alt="Sunset in the mountains" />
                     <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <div class="font-bold text-xl mb-2">Join Events</div>
                         <p class="text-gray-700 text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                            Find events that you like and sign up with one-click! Earn points by joining events and have the chance to win prizes
                         </p>
                     </div>
                 </div>
 
                 <div class="max-w-sm rounded overflow-hidden shadow-lg mt-2">
-                    <img class="w-full" src="slide1.png" alt="Sunset in the mountains" />
+                    <img class="w-full" src="groupsPIC.jpg" alt="Sunset in the mountains" />
                     <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <div class="font-bold text-xl mb-2">Create Groups</div>
                         <p class="text-gray-700 text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                            Do you have a passion and interested in finding people who share your passion? Create a group today and find people to work together and be friends
                         </p>
                     </div>
                 </div>
 
                 <div class="max-w-sm rounded overflow-hidden shadow-lg mt-2">
-                    <img class="w-full" src="slide1.png" alt="Sunset in the mountains" />
+                    <img class="w-full" src="chat.jpg" alt="Sunset in the mountains" />
                     <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+                        <div class="font-bold text-xl mb-2">Chat with your classmates</div>
                         <p class="text-gray-700 text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                            You do not have to go to another application to chat with your friends, just click on the DM section and start texting your friends
                         </p>
                     </div>
                 </div>
@@ -121,41 +137,31 @@ const Home = () => {
 
 
         <div className='container mt-10 mx-auto'>
-            <h1 className='font-bold text-3xl'>Join us and enjoy increase your knowledge and grades</h1>
-            <p className='text-muted text-gray-600 text-base font-small'>Read our articles, student of the week, club events, sport news and much more on our website.</p>
+            <h1 className='font-bold text-3xl'>Upcoming events that you can sign up right now</h1>
+            <p className='text-muted text-gray-600 text-base font-small'>Create your account now and sign up for any event that you want to attend</p>
         
 
             {/*card section */}
-            <div className='flex justify-between'>
-                <div className = "w-full mt-2 card md:w-1/5">
-                    <div className="rounded-lg hover:border-blue-500 py-2"> 
-                        <div className='fill-neutral mx-auto  mt-1'><img src = "slide1.png"></img></div>
-                        <div className="mt-2 p-3">
-                        <h5 className="text-center font-bold  text-2xl ">dsadsadas</h5>
-                        <p className="text-center mt-2">dasdsa</p>
-                        </div>
-                    </div>
-                </div>
+            <div className='flex justify-between align-stretch wrap'>
 
-                <div className = "w-full mt-2 card md:w-1/5">
-                    <div className="rounded-lg hover:border-blue-500 py-2"> 
-                        <div className='fill-neutral mx-auto  mt-1'><img src = "slide1.png"></img></div>
-                        <div className="mt-2 p-3">
-                        <h5 className="text-center font-bold  text-2xl ">dsadsadas</h5>
-                        <p className="text-center mt-2">dasdsa</p>
-                        </div>
-                    </div>
-                </div>
+                    {events.map((element) => {
+                        return (
+                            <div className='w-1/2 mt-4 justify-center  mx-auto'>
+                            <Link>
+                                    <div className="card w-10/12 bg-base-100 shadow-xl">
+                                        <div className="card-body">
+                                            <h2 className="card-title">{element.header}</h2>
+                                            <p>{element.description}</p>
+                                            <p>{element.club}</p>
+                                            <div className="flex justify-between items-center">
+                                            </div>
+                                        </div>
+                                    </div>
+                            </Link>
+                          </div>
+                        )
+                    })}
 
-                <div className = "w-full mt-2 card md:w-1/5">
-                    <div className="rounded-lg hover:border-blue-500 py-2"> 
-                        <div className='fill-neutral mx-auto  mt-1'><img src = "slide1.png"></img></div>
-                        <div className="mt-2 p-3">
-                        <h5 className="text-center font-bold  text-2xl ">dsadsadas</h5>
-                        <p className="text-center mt-2">dasdsa</p>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
@@ -165,13 +171,13 @@ const Home = () => {
 
 
 
-        <div className='container mt-10 mx-auto'>
+        <div className='container mt-10 mb-10 mx-auto'>
             <h1 className='font-bold text-3xl'>Sign up now!</h1>
             <div className='flex  justify-around items-center'>
                 <SignupSVG></SignupSVG>
-                <div>
-                    <p className='text-muted text-gray-600 text-base font-small'>Read our articles, student of the week, club events, sport news and much more on our website.</p>
-                    <button className='btn bg-blue-500 w-1/2 mx-auto'>Sign Un</button>
+                <div className='text-center'>
+                    <p className='text-muted text-gray-600 text-base font-small '>Read our articles, student of the week, club events, sport news and much more on our website.</p>
+                    <button className='btn bg-blue-500 w-1/2 mx-auto hover:bg-blue-700'>Sign Up</button>
                 </div>
             </div>
         </div>

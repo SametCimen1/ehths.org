@@ -15,7 +15,19 @@ import Signin from './routes/Signin'
 import Signup from './routes/Signup'
 import Dashboard from './routes/Dashboard'
 import Profile from './routes/Profile'
+import Clubs from './routes/Clubs';
+import ClubBig from './routes/ClubBig'
+import Admin from './routes/Admin';
 
+
+
+import Dm from './connect/dm'
+import DmTalk from './connect/dmTalk'
+import Groups from './connect/communities/communities'
+import LongGroups from './connect/communities/comLong'
+import MakeFriends from './connect/makeFriends'
+// import Communicate from './communicate/communicate';
+// import BigCommunicate from './communicate/bigCommunicate'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +49,47 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile></Profile>
+  },
+  {
+    path: "/clubs",
+    element: <Clubs></Clubs>
+  },
+  {
+    path: "/club/:id",
+    element: <ClubBig></ClubBig>
+  },
+  {
+    path: "/connect/dm",
+    element: <Dm></Dm>
+  },
+  {
+    path: "/connect/dm/to/:spacedName",
+    element: <DmTalk></DmTalk>
+  },
+  // {
+  //   path: "/connect/communicate",
+  //   element: <Communicate></Communicate>
+  // },
+  // {
+  //   path: "/connect/communicate/:id",
+  //   element: <BigCommunicate></BigCommunicate>
+  // },
+  {
+    path: "/connect/communities",
+    element: <Groups></Groups>
+  },
+  {
+    path: "/connect/communitie/:id",
+    element: <LongGroups></LongGroups>
+  },
+  {
+    path: "/connect/makefriends",
+    element: <MakeFriends></MakeFriends>
+  }
+  ,
+  {
+    path: "/admin",
+    element: <Admin></Admin>
   }
 ]); 
 const root = ReactDOM.createRoot(document.getElementById('root'));
