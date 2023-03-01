@@ -226,9 +226,11 @@ const ClubBig = () => {
               clubid: id,
             })
         })
+        const res = await data.json();
         alert('deleted the club')
-        navigate('/clubs')
-        window.location.reload(true);
+        console.log('resdsadas', res)
+        // navigate('/clubs')
+        // window.location.reload(true);
     }
     
     return (
