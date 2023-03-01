@@ -4,7 +4,7 @@
   "description": "Eht student website",
   "main": "server.js",
   "engines": {
-    "node":"16.14.0",
+    "node": "16.14.0",
     "npm": "8.3.1"
   },
   "scripts": {
@@ -16,7 +16,7 @@
   "author": "Samet Cimen",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
