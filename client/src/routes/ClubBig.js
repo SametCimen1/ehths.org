@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom';
 import { Link } from "react-router-dom";
+import Admin from './Admin';
+import { useNavigate } from 'react-router';
 
 const ClubBig = () => {
-
+    const navigate = useNavigate ();
     const{ id } = useParams();
     const [club, setClub] = useState('');
     const [alreadyIn, setAlreadyIn] = useState(false);
@@ -14,9 +16,11 @@ const ClubBig = () => {
     const [eventName, setEventName] = useState('')
     const [eventDescription, setEventDescription] = useState('')
     const [eventDate, setEventDate] = useState('')
-
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const getInfo = async() => {
+
+
         const data = await fetch("/getClubInfo", {
             method:"POST",
             headers: {
@@ -30,6 +34,18 @@ const ClubBig = () => {
         });
         const res = await data.json();
         setClub(res)
+
+        const data2 = await fetch("/getamiadmin", {
+            method:"POST",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+        })
+        const res2 = await data2.json();
+        console.log("AM I ADMIN", res2)
+        setIsAdmin(true)
     }
 
     const getIsIn = async() => {
@@ -101,7 +117,27 @@ const ClubBig = () => {
               id
             })
         })
+        alert("Joined the Club successfully")
+        window.location.reload(true);
     }
+
+    const leaveClub = async(id) => {
+        const data = await fetch("/leaveClub", {
+            method:"POST",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+            body:JSON.stringify({
+              id
+            })
+        })
+        alert("Left the Club successfully")
+        
+        window.location.reload(true);
+    }
+
 
 
 
@@ -174,8 +210,25 @@ const ClubBig = () => {
         if(data.status === 200){
             window.location.reload(true); 
         }
-        
+    }
 
+
+
+    const deleteClub = async(id) => {
+        const data = await fetch("/deleteClub", {
+            method:"POST",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+            body:JSON.stringify({
+              clubid: id,
+            })
+        })
+        alert('deleted the club')
+        navigate('/clubs')
+        window.location.reload(true);
     }
     
     return (
@@ -201,9 +254,16 @@ const ClubBig = () => {
 
                 <div>
                     <div className='w-1/2'>
-                        <button className='mr-2  border-2 border-blue-500 p-2 rounded w-1/3' onClick = {() => setCreateEventDrop(!createEventDrop)}>Create an Event</button>
-                        {!alreadyIn ? <button className="btn btn-primary w-1/3" onClick = {() => joinGroup(club.id)}>Join</button> : <button className='border-2 border-red-500 p-2 rounded w-1/3'>Leave</button>}
+                        {Admin && 
+                            <div>
+                                <button className='mr-2  border-2 border-blue-500 p-2 rounded w-1/3' onClick = {() => setCreateEventDrop(!createEventDrop)}>Create an Event</button>
+                                <button className='mr-2 btn-error' onClick={() => deleteClub(club.id)}>Delete the Club</button>
+                            </div>
+                        }
+                        {!alreadyIn ? <button className="btn btn-primary w-1/3" onClick = {() => joinGroup(club.id)}>Join</button> : <button className='border-2 border-red-500 p-2 rounded w-1/3' onClick = {() => leaveClub(club.id)}>Leave</button>}
                     </div>
+                    
+
                     
                     <div>
                         {createEventDrop && 

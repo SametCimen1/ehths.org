@@ -101,10 +101,35 @@ app.post("/getClubInfo",  async(req,res) => {
 app.post("/joinClub",  async(req,res) => {
     const userId = await getUserIndex(req);
     const id = req.body.id;
-    console.log("JOIN CLUB", userId)
-    console.log("JOIN CLUB", id)
     const data = await pool.query("INSERT INTO members(userid, clubid) VALUES($1, $2)", [userId, id])
     res.json(data.rows[0])
+})
+app.post("/leaveClub",  async(req,res) => {
+    const userId = await getUserIndex(req);
+    const id = req.body.id;
+    console.log("LEAVING CLUB", userId)
+    const data = await pool.query("DELETE FROM members WHERE userid = $1 AND clubid = $2", [userId, id])
+    res.json(data.rows[0])
+})
+app.post("/deleteClub",  async(req,res) => {
+    const userId = await getUserIndex(req);
+    const id = req.body.id;
+    console.log("DELETING CLUB", userId)
+    const data2 = await pool.query("DELETE FROM events WHERE clubid = $1", [id])
+    const data = await pool.query("DELETE FROM CLUBS WHERE clubid = $1", [id])
+    res.json(data.rows[0])
+})
+
+
+app.post("/getamiadmin", async(req,res) => {
+    const userId = await getUserIndex(req);
+    const data = await pool.query("SELECT role FROM users WHERE id = $1", [userId])
+    try {
+        res.json(data.rows[0].role === 'admin')        
+    } catch (error) {
+        res.json(false)
+    }
+
 })
 
 app.post("/amiin",  async(req,res) => {
