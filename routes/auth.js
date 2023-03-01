@@ -24,7 +24,7 @@ router.post('/signup', async(req,res) => {
                                 // const lowerCaseName = assignedName.toLowerCase();
                                 
 
-                                const makeUser = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests, points) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12, $13)",[email, hashPassword, 'user',true, '', assignedName, [], email,'', false, '', [], 0])
+                                const makeUser = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests, points) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12, $13)",[email, hashPassword, 'user', true, '', name, [], email,'', false, '', [], 0])
                                 return res.status(200).json("sent a verification link to your email. Please check it")
                             }
 
