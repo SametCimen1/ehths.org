@@ -288,7 +288,7 @@ export default function HomeUser() {
 
             
 
-
+{/* 
             <div className='mt-4 mb-4 p-2'>                
             
                 <div className = "text-center">
@@ -298,7 +298,7 @@ export default function HomeUser() {
 
                 </div>
             
-            </div>
+            </div> */}
 
 
 

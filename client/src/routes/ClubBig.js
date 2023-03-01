@@ -223,7 +223,7 @@ const ClubBig = () => {
             redirect: 'follow',
             credentials: 'include',
             body:JSON.stringify({
-              clubid: id,
+              id: id,
             })
         })
         const res = await data.json();
