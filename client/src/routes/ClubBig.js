@@ -229,8 +229,8 @@ const ClubBig = () => {
         const res = await data.json();
         alert('deleted the club')
         console.log('resdsadas', res)
-        // navigate('/clubs')
-        // window.location.reload(true);
+        navigate('/clubs')
+        window.location.reload(true);
     }
     
     return (
@@ -259,8 +259,8 @@ const ClubBig = () => {
 
                         
                             
-                                {Admin && <button className='mr-2  border-2 border-blue-500 p-2 rounded w-1/3' onClick = {() => setCreateEventDrop(!createEventDrop)}>Create an Event</button>}
-                                {Admin &&<button className='mr-2 btn btn-error w-1/3' onClick={() => deleteClub(club.id)}>Delete the Club</button> }
+                                {isAdmin && <button className='mr-2  border-2 border-blue-500 p-2 rounded w-1/3' onClick = {() => setCreateEventDrop(!createEventDrop)}>Create an Event</button>}
+                                {isAdmin &&<button className='mr-2 btn btn-error w-1/3' onClick={() => deleteClub(club.id)}>Delete the Club</button> }
                             
                         
                         {!alreadyIn ? <button className="btn btn-primary w-1/3" onClick = {() => joinGroup(club.id)}>Join</button> : <button className='border-2 border-red-500 p-2 rounded w-1/3' onClick = {() => leaveClub(club.id)}>Leave</button>}
