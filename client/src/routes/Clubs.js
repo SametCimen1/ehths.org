@@ -6,7 +6,14 @@ const Clubs = () => {
 
     const getClubs = async() => {
         console.log('making the call')
-        const data = await fetch("http://localhost:5000/getClubs")
+        const data = await fetch("/getClubs", {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+        })
         const res = await data.json();
         setClubs(res)
     }

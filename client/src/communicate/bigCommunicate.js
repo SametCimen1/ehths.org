@@ -1,11 +1,11 @@
 import Layout from '../usedMore/Layout';
 import React from 'react'
 
-import {  useSearchParams } from 'react-router-dom';
+
 import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router';
 import CommentBox from './commentBox';
-
+import {  useSearchParams } from 'react-router-dom';
 
 export default function BigCommunicate() {
     const [isItMine, setIsItMine] = useState(false);
