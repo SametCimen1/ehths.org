@@ -129,6 +129,11 @@ app.post("/getevents",  async(req,res) => {
     const data = await pool.query("SELECT * FROM events WHERE clubid = $1 AND checkedin = false", [req.body.id])
     res.json(data.rows)
 })
+app.post("/getAllEvents",  async(req,res) => {
+    const data = await pool.query("SELECT * FROM events WHERE checkedin = false", [req.body.id])
+    res.json(data.rows)
+})
+
 app.post("/getPeopleSignedUp",  async(req,res) => {
     const data = await pool.query("SELECT userid FROM signups WHERE clubid = $1 AND eventid = $2", [req.body.clubID, req.body.eventID ])
     const newArr = []

@@ -9,7 +9,8 @@ const Admin = () => {
     const [createClubOpen, setCreateClubOpen] = useState(false);
     const [studentHide, setStudentHide] = useState(false)
     const [students, setStudents] = useState(undefined)
-
+    const [events, setEvents] = useState([])
+    const [eventsHide, setEventsHide] = useState(false)
 
     const [clubName, setClubName] = useState('');
     const [clubDescription, setClubDescription] = useState('');
@@ -54,6 +55,18 @@ const Admin = () => {
           const res3 = await data3.json();
           setStudents(res3);
 
+          const data4 = await fetch("/getAllEvents", {
+            method:"POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include'
+          })
+          
+          const res4 = await data4.json();
+          setEvents(res4);
+
 
 
     }
@@ -76,7 +89,7 @@ const Admin = () => {
                     IMGurl
                 })
             });
-
+            window.location.reload(true);
         }
     }
 
@@ -106,7 +119,7 @@ const Admin = () => {
                                 {(clubs !== undefined && clubsHide === false) && clubs.map((elem) => {
                                     return(
                                         <div className='min-w-1/4 mt-4 mx-2'>
-                                            <Link to = {`http://localhost:3000/club/${elem.id}`}>
+                                            <Link to = {`/club/${elem.id}`}>
                                                 <div className="card w-96 bg-base-100 shadow-xl">
                                                 <figure><img className='clubPicture' src = {elem.picture} alt="Club Picture" /></figure>
                                                 <div className="card-body">
@@ -143,7 +156,7 @@ const Admin = () => {
                                         <input className='border-2 p-2 w-full' type = "text" placeholder='Club Picture URL'  onChange = {(e) => setIMGurl(e.target.value)}></input>
                                     </div>
                                     
-                                    <button className='mt-2  border-2 border-blue-500 p-2 rounded w-full' onClick = {() => createClub()}>Create an Event</button>
+                                    <button className='mt-2  border-2 border-blue-500 p-2 rounded w-full' onClick = {() => createClub()}>Create the club</button>
                                 </div>
                             }
 
@@ -176,8 +189,8 @@ const Admin = () => {
                                                     </div>
 
                                                     <div className='flex w-1/3'>
-                                                        <button className='btn bg-blue-500 mr-4 hover:bg-blue-700' onClick={() => {}}>DM</button>
-                                                        <button className='btn bg-red-500 hover:bg-red-700'onClick={() => {}}>Block</button>
+                                                        <button className='btn bg-blue-500 mr-4 hover:bg-blue-700' onClick={() => {}}>Edit Information</button>
+                                                        <button className='btn bg-red-500 hover:bg-red-700'onClick={() => {}}>Remove</button>
                                                     </div>
 
                                                 </div>
@@ -186,6 +199,43 @@ const Admin = () => {
                                  })}
                             </div>
                         </div>
+
+
+                        
+                        <div>
+                            <div className='text-center justify-center flex items-center mt-10'>
+                                <p className='font-bold text-xl'>Events</p>
+                                <button className='p-1 px-2 rounded-xl bg-gray-200 hover:bg-gray-400 ml-3' onClick = {() => setEventsHide(!eventsHide)}>{eventsHide === false ? 'Hide' : 'Show' }</button>
+                            </div>
+                            <div>
+                                {(events !== undefined && eventsHide === false) && events.map((element) => {
+                                    return(
+                                                    <div className='w-1/4 mt-4 mx-2'>
+                                                       
+                                                                <div className="card  bg-base-100 shadow-xl">
+                      
+                                                                        <div className="card-body">
+                                                                            <Link to = {`/event/${element.id}?club=${element.clubid}`}>
+                                                                                <h2 className="card-title">{element.header}</h2>
+                                                                                <p className='mt-2'>{element.description}</p>
+                                                                                <p className='text-sm mt-3'>{element.date.substring(0,10)}</p>
+                                                                                <div className="flex justify-between items-center">
+                                                                                
+                                                                                </div>
+                                                                            </Link>
+                                                                        </div>
+                    
+                                                                   
+                                                                </div>
+                                                        
+                                                        
+                                                    </div>
+                                    )
+                                })};
+                                            
+                            </div>
+                        </div>
+
                         
                     </div>
 

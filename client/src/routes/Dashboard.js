@@ -256,7 +256,7 @@ export default function HomeUser() {
                     {myClubs.map((elem) => {
                       return(
                         <div className='w-1/4 mt-4 mx-2'>
-                          <Link to = {`http://localhost:3000/club/${elem.id}`}>
+                          <Link to = {`/club/${elem.id}`}>
                             <div className="card w-96 bg-base-100 shadow-xl">
                             <figure><img src = {elem.picture} alt="Club Picture" /></figure>
                             <div className="card-body">
