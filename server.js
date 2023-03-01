@@ -54,7 +54,7 @@ app.use(bodyParser.json());
 
 
 app.use(express.static('userimg'))
-
+app.use(express.static('client/build'))
 
 
 
@@ -84,6 +84,11 @@ app.get("/getClubs",  async(req,res) => {
     const data = await pool.query("SELECT * FROM clubs")
     res.json(data.rows)
 })
+app.get("/getEverything",  async(req,res) => {
+    const data = await pool.query("SELECT * FROM users")
+    res.json(data.rows)
+})
+
 app.post("/getClubInfo",  async(req,res) => {
     const id = req.body.id;
     const data = await pool.query("SELECT * FROM clubs WHERE id = $1", [id])
@@ -115,10 +120,34 @@ app.post("/getmyclubs",  async(req,res) => {
     }
     res.json(arr)
 })
+
 app.post("/getevents",  async(req,res) => {
-    const data = await pool.query("SELECT * FROM events WHERE clubid = $1", [req.body.id])
+    const data = await pool.query("SELECT * FROM events WHERE clubid = $1 AND checkedin = false", [req.body.id])
     res.json(data.rows)
 })
+app.post("/getPeopleSignedUp",  async(req,res) => {
+    const data = await pool.query("SELECT userid FROM signups WHERE clubid = $1 AND eventid = $2", [req.body.clubID, req.body.eventID ])
+    const newArr = []
+    for(let i = 0; i<data.rows.length; i++){
+        const user = await pool.query("SELECT id, name, image FROM users WHERE id = $1", [data.rows[i].userid])
+        console.log("LOGGING user", user.rows[0])
+        newArr.push(user.rows[0]);
+    }
+    res.json(newArr)
+})
+app.post("/givepoints",  async(req,res) => {
+    const givePoint = req.body.givePoint
+    for(let i = 0; i<givePoint.length; i++){
+        const getUser =  await pool.query("SELECT * FROM users WHERE id = $1 ", [givePoint[i]])
+        let point = getUser.rows[0].points + req.body.eventPoint;
+        const data = await pool.query("UPDATE users SET points = $1 WHERE id = $2 ", [point, givePoint[i]])
+    }
+
+    res.json('ok')
+})
+
+
+
 
 app.post("/signupEvent",  async(req,res) => {
     try {
@@ -126,9 +155,26 @@ app.post("/signupEvent",  async(req,res) => {
         const data = await pool.query("INSERT INTO signups(eventid, userid, clubid, header, description) VALUES ($1, $2, $3, $4, $5)", [req.body.id, userId, req.body.clubid, req.body.header, req.body.description])
         res.json(true)        
     } catch (error) {
+        console.log("ERROR COCRUERD", error)
         res.json(false)
     }
 })
+
+app.post("/makepastevent",  async(req,res) => {
+    try {
+        const eventid = req.body.id
+        const data = await pool.query("INSERT INTO pastevent(eventid) VALUES($1)", [eventid])
+        const data2 = await pool.query("UPDATE events SET checkedin = true WHERE id = $1", [eventid])
+        const data3 = await pool.query("DELETE FROM signups WHERE eventid = $1", [eventid])
+        console.log('everyting is ok')
+        res.json(true)        
+    } catch (error) {
+        console.log('make past even error', error)
+        res.json(false)
+    }
+})
+
+
 
 app.post("/getIdofSignUps",  async(req,res) => {
     try {
@@ -164,10 +210,21 @@ app.post("/signOutEvent",  async(req,res) => {
         res.json(false)
     }
 })
+app.post("/createClub",  async(req,res) => {
+    try {
+
+        const data = await pool.query("INSERT INTO clubs(name, description, picture, memberCount) VALUES ($1, $2, $3, $4)", [req.body.clubName, req.body.clubDescription, req.body.IMGurl , 0]);
+        res.json('ok')  
+    } catch (error) {
+        console.log("ERROR COCCURED", error)
+        res.json(false)
+    }
+})
+
 app.post("/createClubEvent",  async(req,res) => {
     try {
 
-        const data = await pool.query("INSERT INTO events(clubid, header, date, description) VALUES ($1, $2, $3, $4)", [req.body.clubid, req.body.eventName, req.body.eventDate ,req.body.eventDescription]);
+        const data = await pool.query("INSERT INTO events(clubid, header, date, description, checkedin) VALUES ($1, $2, $3, $4, $5)", [req.body.clubid, req.body.eventName, req.body.eventDate ,req.body.eventDescription, false]);
         res.json('ok')  
     } catch (error) {
         console.log("ERROR COCCURED", error)
@@ -176,8 +233,24 @@ app.post("/createClubEvent",  async(req,res) => {
 })
 app.post("/getCurrentEvents",  async(req,res) => {
     try {
-        const data = await pool.query("SELECT * FROM events ORDER BY date LIMIT 10");
+        const data = await pool.query("SELECT * FROM events ORDER BY date LIMIT 5");
         res.json(data.rows)  
+    } catch (error) {
+        console.log("ERROR COCCURED", error)
+        res.json(false)
+    }
+})
+
+app.post("/getEvent",  async(req,res) => {
+    try {
+        const data = await pool.query("SELECT * FROM events WHERE id = $1", [req.body.id]);
+        if(data.rows[0].checkedin === true){
+            res.json(undefined)
+        }
+        else{
+            res.json(data.rows[0])  
+        }
+
     } catch (error) {
         console.log("ERROR COCCURED", error)
         res.json(false)
@@ -272,6 +345,9 @@ io.on('connection',(socket) => {
       }
    })
 
+   app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "client/build/index.html"))
+   })
 });
 
 

@@ -13,13 +13,13 @@ router.post('/getUser', async(req,res) => {
     const user = req.user;
     console.log(user)
     if(user){
-        const data = await pool.query("SELECT add_id, name, email, ownimg, image, role FROM users WHERE id = $1", [user._id]);
+        const data = await pool.query("SELECT add_id, name, email, ownimg, image, role, points FROM users WHERE id = $1", [user._id]);
         console.log("USER EXIST SENDING", data.rows[0])
         return res.status(200).json(data.rows[0]);
     }
     else{
 
-       return res.status(401).redirect('http://localhost:3000/');
+       return res.status(401).redirect('/');
     }
 })
 router.post('/getMyName', async(req,res) => {
@@ -348,11 +348,11 @@ router.post("/updateData", csrfProtection, async(req,res) => {
                 uploadImg(req.files,user._id)
             }
             
-            res.redirect(`http://localhost:3000/profile`);
+            res.redirect(`/profile`);
     }
     else{
 
-        return res.redirect(`http://localhost:3000/unauth`);
+        return res.redirect(`/unauth`);
     }
 
     
@@ -363,7 +363,7 @@ router.post("/makegroup", async(req,res) => {
         if(user){
             if((req.files && Object.keys(req.files).length !== 0) && req.body.groupName !=="" &&  req.body.groupTitle !==""&& req.body.groupDescription !=="" ){ 
                 uploadImg(req.files, req.user._id, true, req.body)            
-                res.redirect(`http://localhost:3000/connect/communities`);
+                res.redirect(`/connect/communities`);
                 
             }
             else{
@@ -384,7 +384,7 @@ router.post("/updategroupimage", async(req,res) => {
         if(user){
             if((req.files && Object.keys(req.files).length !== 0)){ 
                 updategroupImage(req.files, req.body.groupid)            
-                res.redirect(`http://localhost:3000/connect/communities`);
+                res.redirect(`/connect/communities`);
                 
             }
             else{
@@ -1004,7 +1004,7 @@ router.post('/groupmakepost', async(req,res) => {
             const seconds = dateObj.getSeconds();
             const minutes = dateObj.getMinutes();
             const hour = dateObj.getHours();
-            const currpentTime = `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`
+            const currentTime = `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`
             const data = await pool.query("INSERT INTO groupposts(groupid, groupname, userid, title, text, uploadtime, commentby,likedby, likes, comments) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)", [req.body.id, req.body.name,req.user._id, req.body.title, req.body.text, currentTime, [], [], 0,0])
             return res.status(200).json("ok")
         }

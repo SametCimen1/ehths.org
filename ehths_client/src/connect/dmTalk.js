@@ -21,7 +21,7 @@ export default function DmTalk() {
 
       const getMyName = async() => {
 
-        const data = await fetch("http://localhost:5000/user/getMyName", {
+        const data = await fetch("/user/getMyName", {
           method:"POST",
           headers: {
             'Content-Type': 'application/json'

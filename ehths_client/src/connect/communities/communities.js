@@ -8,7 +8,7 @@ export default function Groups() {
 
 
     const getcsrf = async() => {
-      const data = await fetch("http://localhost:5000/user/getcsrf", {
+      const data = await fetch("/user/getcsrf", {
         method:"GET",
         headers: {
           'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ export default function Groups() {
     let smallestGroupIndex = Number.MAX_SAFE_INTEGER;
 
     const getMyGroups = async()=> {
-      const data = await fetch("http://localhost:5000/user/getMyGroups", {
+      const data = await fetch("/user/getMyGroups", {
         method:"GET",
         headers: {
           'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export default function Groups() {
 
 
     const getDefaultGroups = async() => {
-     const data = await fetch("http://localhost:5000/user/getGroups", {
+     const data = await fetch("/user/getGroups", {
         method:"GET",
         headers: {
           'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ export default function Groups() {
 
     const loadMore =  async(type) => {
       if(type === 'mygroups'){
-        const data = await fetch("http://localhost:5000/posts/getmoremygroups",{
+        const data = await fetch("/posts/getmoremygroups",{
           method:"PUT",
           headers: {
               'Content-Type': 'application/json'
@@ -87,7 +87,7 @@ export default function Groups() {
         const response = await data.json();
         console.log("RESPONSE")
         if(response.length === 0){
-          alert("no more post avaible")
+          alert("no more community avaible")
         }
         else{
           const newArr = [];
@@ -103,7 +103,7 @@ export default function Groups() {
 
       }
       else if (type === 'groups'){
-        const data = await fetch("http://localhost:5000/posts/getmoregroups",{
+        const data = await fetch("/posts/getmoregroups",{
           method:"PUT",
           headers: {
               'Content-Type': 'application/json'
@@ -147,7 +147,7 @@ export default function Groups() {
                  {makeYourGroup &&
                  <div className='w-1/3 mt-3 py-2 bg-gray-100 p-2'>
                    <form  id='uploadForm' 
-                      action='http://localhost:5000/user/makegroup' 
+                      action='/user/makegroup' 
                       method='post' 
                       encType="multipart/form-data">
                       <input type = "hidden" name ="_csrf" value={csrf}></input>
@@ -200,8 +200,8 @@ export default function Groups() {
                         <div >
 
 
-                      <div >
-                        <h2>Joined Communities:</h2>
+                      <div className='mt-2'>
+                        <h2 className='font-semibold'>Joined Communities:</h2>
                          {/* <input type = "text" placeholder = "Search by name!"></input>
                         <i class="fas fa-caret-up"></i> */}
                         </div>
@@ -219,15 +219,15 @@ export default function Groups() {
                               <SmallGroup  group = {group}></SmallGroup>
                             )
                           })}
-                          <button onClick = {() => loadMore("mygroups")} >Load More</button>
+                          <button className='btn btn-ghost mt-2' onClick = {() => loadMore("mygroups")} >Load More</button>
                          </div>
                          
                          : <h1 className = "noFriends">No groups avaible right now</h1>}
                           </div>
 
 
-                        <div>
-                        <h2>Latest Communities:</h2>
+                        <div className='mt-2'>
+                        <h2 className='font-semibold'>Latest Communities:</h2>
                         {/* <input type = "text" placeholder = "Search by name!"></input>
                         <i class="fas fa-caret-up"></i> */}
                         </div>
@@ -246,7 +246,7 @@ export default function Groups() {
                               <SmallGroup group = {group}></SmallGroup>
                             )
                           })}
-                          <button onClick = {() => loadMore("groups")} >Load More</button>
+                          <button className='btn btn-ghost' onClick = {() => loadMore("groups")} >Load More</button>
                          </div>
                          
                          : <h1 className = "noFriends">No groups avaible right now</h1>}

@@ -14,7 +14,7 @@ export default function Signin() {
         e.preventDefault()
         console.log("CALLED")
         setResponse("Sending...")
-        const data = await fetch("http://localhost:5000/auth/signin",{
+        const data = await fetch("/auth/signin",{
             method:"POST",
             headers: {
             'Content-Type': 'application/json'

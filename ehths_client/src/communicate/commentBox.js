@@ -13,7 +13,7 @@ export default function CommentBox({element}) {
     },[])
     const getUser = async() => {
         if(element.userid){
-            const data = await fetch("http://localhost:5000/user/getUserById", {
+            const data = await fetch("/user/getUserById", {
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export default function CommentBox({element}) {
 
 
     const deleteComment = async() => {
-        const data = await fetch("http://localhost:5000/posts/deletecomment", {
+        const data = await fetch("/posts/deletecomment", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ export default function CommentBox({element}) {
         <div >
               <div >
                         {isme && <i onClick = {()=> deleteComment()} className = {`${"fas fa-trash-alt"} `}></i>}
-                        {img === "" ? <img alt = "user profile" className = {` ${"profileImg"}`} src = {'Logo'}></img> : <img alt = "user profile"  className = {` ${"profileImg"}`} src = {`http://localhost:5000/img/${img}`}></img> } 
+                        {img === "" ? <img alt = "user profile" className = {` ${"profileImg"}`} src = {'Logo'}></img> : <img alt = "user profile"  className = {` ${"profileImg"}`} src = {`/img/${img}`}></img> } 
                         <p onClick = {()=> navigate(`/user/${element.userid}`)}>u/{name}</p>
               </div>
 

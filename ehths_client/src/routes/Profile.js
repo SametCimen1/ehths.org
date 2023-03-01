@@ -9,7 +9,7 @@ export default function Profile() {
 
 
     const getcsrf = async() => {
-      const data = await fetch("http://localhost:5000/user/getcsrf", {
+      const data = await fetch("/user/getcsrf", {
         method:"GET",
         headers: {
           'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export default function Profile() {
     const [friendReq, setFriendReq] = useState([]);
 
     const getData = async() => {
-        const data = await fetch("http://localhost:5000/user/getUser", {
+        const data = await fetch("/user/getUser", {
           method:"POST",
           headers: {
             'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ export default function Profile() {
 
 
     const getFriendRequests = async() => {
-        const data = await fetch("http://localhost:5000/user/friendRequests",{
+        const data = await fetch("/user/friendRequests",{
             method:"POST",
             headers: {
               'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ export default function Profile() {
 
 
     const getFriends = async() => {
-      const data = await fetch("http://localhost:5000/user/getFriends", {
+      const data = await fetch("/user/getFriends", {
         method:"POST",
           headers: {
             'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ export default function Profile() {
 
     const getUser = async(userId) => {
   
-      const data = await fetch("http://localhost:5000/user/getSingleUser",{ 
+      const data = await fetch("/user/getSingleUser",{ 
       method:"POST",
       headers: {
         'Content-Type': 'application/json'
@@ -137,7 +137,7 @@ export default function Profile() {
 
 
   const getMyPosts = async() => {
-    const data = await fetch("http://localhost:5000/user/getmyposts",{
+    const data = await fetch("/user/getmyposts",{
       method:"GET",
       headers: {
         'Content-Type': 'application/json'
@@ -187,7 +187,7 @@ export default function Profile() {
   }
 
     const acceptFriend = async(id) => {
-      const data = await fetch("http://localhost:5000/user/acceptfriend",{
+      const data = await fetch("/user/acceptfriend",{
         method:"POST",
         headers: {
           'Content-Type': 'application/json'
@@ -206,7 +206,7 @@ export default function Profile() {
 
 
     const declineFriend = async(id,type) => {
-      const data = await fetch("http://localhost:5000/user/removeFriend",{
+      const data = await fetch("/user/removeFriend",{
         method:"POST",
         headers: {
           'Content-Type': 'application/json'
@@ -225,7 +225,7 @@ export default function Profile() {
 
     const loadMore = async(type, limit) => {
 
-      const data = await fetch("http://localhost:5000/posts/getmoremypost", {
+      const data = await fetch("/posts/getmoremypost", {
         method:"POST",
         headers: {
           'Content-Type': 'application/json'
@@ -300,7 +300,7 @@ export default function Profile() {
                   <div className = "flex justify-between mt-3 cursor-pointer" onClick={() => navigate("/profile")} >
                     
                      <div className = "w-1/4">
-                       {user.ownimg ? <img className = "profileImg rounded" src = {`http://localhost:5000/img/${user.image}`}></img> : <img src = 'slide1.png'></img>}
+                       {user.ownimg ? <img className = "profileImg rounded" src = {`/img/${user.image}`}></img> : <img src = 'slide1.png'></img>}
                      </div>
                      
 
@@ -371,7 +371,7 @@ export default function Profile() {
                         <div>
                           {friend.ownimg ? (
                             <img
-                              src={`http://localhost:5000/img/${friend.image}`}
+                              src={`/img/${friend.image}`}
                             ></img>
                           ) : (
                             <img src="slide1.png"></img>
@@ -407,7 +407,7 @@ export default function Profile() {
                 <h2 className='font-bold text-2xl'>Edit Profile</h2>
                 <form
                   id="uploadForm"
-                  action="http://localhost:5000/user/updateData"
+                  action="/user/updateData"
                   method="post"
                   encType="multipart/form-data"
                 >
@@ -458,24 +458,23 @@ export default function Profile() {
                       <div key={friend.id}>
                         {/* <a>{userId}</a> */}
     
-                        <div>
+                        <div className='w-1/4 flex  items-center'>
+
                           {friend.ownimg ? (
-                            <img
-                              src={`http://localhost:5000/img/${friend.image}`}
+                            <img className='w-1/4 rounded-xl'
+                              src={`/img/${friend.image}`}
                             ></img>
                           ) : (
-                            <img src="slide1.png"></img>
+                            <img src="slide1.png"  className='w-1/4 rounded-xl'></img>
                           )}
     
-                          <p>{friend.name}</p>
-                        </div>
-                        <div>
-                          <button onClick={() => dmFriend(friend.name)}>DM</button>
-                          <button
-                            onClick={() => declineFriend(friend.id, "friend")}
-                          >
-                            Block
-                          </button>
+                          <p className='ml-3 w-2/3'>{friend.name}</p>
+
+                          <div className='flex w-1/3'>
+                            <button className='btn bg-blue-500 mr-4 hover:bg-blue-700' onClick={() => dmFriend(friend.name)}>DM</button>
+                            <button className='btn bg-red-500 hover:bg-red-700'onClick={() => declineFriend(friend.id, "friend")}>Block</button>
+                          </div>
+
                         </div>
                       </div>
                     );

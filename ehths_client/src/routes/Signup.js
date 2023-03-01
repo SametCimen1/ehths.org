@@ -22,7 +22,7 @@ export default function Signup() {;
         else{
             if(password.length > 6 && passwordAgain.length > 6 ){
                 e.preventDefault();
-                const data = await fetch("http://localhost:5000/auth/signup", {
+                const data = await fetch("/auth/signup", {
                     method:"POST",
                     headers: {
                       'Content-Type': 'application/json'

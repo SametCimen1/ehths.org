@@ -24,7 +24,7 @@ router.post('/signup', async(req,res) => {
                                 // const lowerCaseName = assignedName.toLowerCase();
                                 
 
-                                const makeUser = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12)",[email, hashPassword, 'user',true, '', assignedName, [], email,'', false, '', []])
+                                const makeUser = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests, points) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12, $13)",[email, hashPassword, 'user',true, '', assignedName, [], email,'', false, '', [], 0])
                                 return res.status(200).json("sent a verification link to your email. Please check it")
                             }
 
@@ -77,7 +77,7 @@ router.post('/signup', async(req,res) => {
                                 from: 'ehths.org@outlook.com',
                                 to: email,
                                 subject: 'EHTHS students verification code',
-                                text: `click this link to verify your account http://localhost:3000/verify/${confirmURL}`
+                                text: `click this link to verify your account /verify/${confirmURL}`
                             };
             
                             let add_id = name;
@@ -173,7 +173,7 @@ router.post('/signin', async(req,res) => {
 
 router.post("/logout", async(req,res) => {
     res.clearCookie('_keh')
-    res.redirect("http://localhost:3000/")
+    res.redirect("/")
 })
 
 

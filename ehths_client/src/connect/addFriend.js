@@ -12,7 +12,7 @@ export default function AddFriend() {
          alert("Please enter a code")
         }
         else{
-          const data = await fetch("http://localhost:5000/user/sendFriendRequestbycode", {
+          const data = await fetch("/user/sendFriendRequestbycode", {
             method:"POST",
             headers: {
             'Content-Type': 'application/json'

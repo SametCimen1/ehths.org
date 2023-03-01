@@ -25,7 +25,7 @@ const Home = () => {
     },[])
     
     const getUser = async () => {
-        const data = await fetch("http://localhost:5000/userexist", {
+        const data = await fetch("/userexist", {
             method:"POST",
             headers: {
               'Content-Type': 'application/json'
@@ -35,12 +35,12 @@ const Home = () => {
         })
         const response = await data.json();
         if(response === true){
-            navigate('/dashboard')
+            
         }
     }
 
     const getEvents = async() => {
-        const data = await fetch("http://localhost:5000/getCurrentEvents", {
+        const data = await fetch("/getCurrentEvents", {
             method:"POST",
             headers: {
               'Content-Type': 'application/json'
@@ -146,7 +146,7 @@ const Home = () => {
 
                     {events.map((element) => {
                         return (
-                            <div className='w-1/2 mt-4 justify-center  mx-auto'>
+                            <div className='cardMin w-1/2 mt-4 justify-center  mx-auto'>
                             <Link>
                                     <div className="card w-10/12 bg-base-100 shadow-xl">
                                         <div className="card-body">
@@ -177,7 +177,7 @@ const Home = () => {
                 <SignupSVG></SignupSVG>
                 <div className='text-center'>
                     <p className='text-muted text-gray-600 text-base font-small '>Read our articles, student of the week, club events, sport news and much more on our website.</p>
-                    <button className='btn bg-blue-500 w-1/2 mx-auto hover:bg-blue-700'>Sign Up</button>
+                    <Link to ="/signup"><button className='btn bg-blue-500 w-1/2 mx-auto hover:bg-blue-700'>Sign Up</button></Link>
                 </div>
             </div>
         </div>

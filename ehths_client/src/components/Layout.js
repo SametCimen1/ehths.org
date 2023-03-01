@@ -10,7 +10,7 @@ const Layout = ({children}) => {
 
 
     const getRealUserData = async() => {
-      const data = await fetch("http://localhost:5000/user/getUser", {
+      const data = await fetch("/user/getUser", {
         method:"POST",
         headers: {
           'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ const Layout = ({children}) => {
 
     const getAuth = async() => {
 
-        const data = await fetch("http://localhost:5000/userexist", {
+        const data = await fetch("/userexist", {
             method:"POST",
             headers: {
               'Content-Type': 'application/json'
@@ -150,7 +150,7 @@ const Layout = ({children}) => {
                   {loggedIn && 
                     <div className='flex items-center justify-center'> 
                       <TrophySVG></TrophySVG>
-                      <a className = "text-white nav-link " href >321</a>
+                      <a className = "text-white nav-link " href >{user.points}</a>
                     </div> 
                     
                   }
@@ -159,10 +159,10 @@ const Layout = ({children}) => {
  
                   {loggedIn &&
                     <div className="dropdown  dropdown-end">
-                      <img tabIndex="0" className = "w-14 h-14  rounded-xl cursor-pointer  object-cover ml-2" src = {`${user.image.includes("http") ? user.image : "http://localhost:5000/img/" + user.image} `}  /> 
+                      <img tabIndex="0" className = "w-14 h-14  rounded-xl cursor-pointer  object-cover ml-2" src = {`${user.image.includes("http") ? user.image : "/img/" + user.image} `}  /> 
                       <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                         <li className='mt-1 focus:bg-slate-300'><a className = "focus:bg-slate-300'"  href = "/dashboard">Panel</a></li>
-                        <li className='mt-1'><a href = {`/${user.username}`}>Public Profile</a></li>
+                        <li className='mt-1'><a href = {`/profile`}>Profile</a></li>
                       </ul>
                     </div>
                   }  

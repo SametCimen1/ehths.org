@@ -31,3 +31,20 @@ code {
   background: #efefef;
   text-align: center;
 }
+
+.linkCard{
+  box-shadow: 1px 1px 2px rgb(192, 192, 192), -1px -1px 2px rgb(192, 192, 192), 1px -1px 2px rgb(192, 192, 192), -1px 1px 2px rgb(192, 192, 192);
+}
+.clubPicture{
+   max-width: 10rem;
+}
+.userPicture{
+  width: 4rem;
+}
+.cardMin{
+  min-width: 30rem;
+}
+.wrap{
+  flex-wrap: wrap;
+  align-items: stretch;
+}

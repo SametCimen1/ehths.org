@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 const ClubBig = () => {
+
     const{ id } = useParams();
     const [club, setClub] = useState('');
     const [alreadyIn, setAlreadyIn] = useState(false);
@@ -16,7 +17,7 @@ const ClubBig = () => {
 
 
     const getInfo = async() => {
-        const data = await fetch("http://localhost:5000/getClubInfo", {
+        const data = await fetch("/getClubInfo", {
             method:"POST",
             headers: {
             'Content-Type': 'application/json'
@@ -32,7 +33,7 @@ const ClubBig = () => {
     }
 
     const getIsIn = async() => {
-        const data = await fetch("http://localhost:5000/amiin", {
+        const data = await fetch("/amiin", {
             method:"POST",
             headers: {
             'Content-Type': 'application/json'
@@ -49,7 +50,7 @@ const ClubBig = () => {
     }
 
     const getEvents = async() => {
-        const data = await fetch("http://localhost:5000/getevents", {
+        const data = await fetch("/getevents", {
             method:"POST",
             headers: {
             'Content-Type': 'application/json'
@@ -66,7 +67,7 @@ const ClubBig = () => {
 
 
 
-        const data2 = await fetch("http://localhost:5000/getIdofSignUps", {
+        const data2 = await fetch("/getIdofSignUps", {
             method:"POST",
             headers: {
             'Content-Type': 'application/json'
@@ -89,7 +90,7 @@ const ClubBig = () => {
     },[])
 
     const joinGroup = async(id) => {
-        const data = await fetch("http://localhost:5000/joinClub", {
+        const data = await fetch("/joinClub", {
             method:"POST",
             headers: {
             'Content-Type': 'application/json'
@@ -107,7 +108,7 @@ const ClubBig = () => {
 
     const signupEvent = async(eventID, eventHeader, eventDescription) => {
         console.log("event id", eventID)
-        const data = await fetch("http://localhost:5000/signupEvent", {
+        const data = await fetch("/signupEvent", {
             method:"POST",
             headers: {
             'Content-Type': 'application/json'
@@ -131,7 +132,7 @@ const ClubBig = () => {
     
     const signOut = async(eventID) => {
         console.log("event id", eventID)
-        const data = await fetch("http://localhost:5000/signOutEvent", {
+        const data = await fetch("/signOutEvent", {
             method:"POST",
             headers: {
             'Content-Type': 'application/json'
@@ -155,7 +156,7 @@ const ClubBig = () => {
         console.log("EVENTS")
         console.log(eventDate)
         console.log(eventName)
-        const data = await fetch("http://localhost:5000/createClubEvent", {
+        const data = await fetch("/createClubEvent", {
             method:"POST",
             headers: {
             'Content-Type': 'application/json'
@@ -186,7 +187,7 @@ const ClubBig = () => {
                         <div className=''>
                             <div class="avatar ">
                                 <div class="rounded">
-                                    <img className = "w-full " src= {club.picture} />
+                                    <img className = "clubPicture " src= {club.picture} />
                                 </div>
                             </div>
                         </div> 
@@ -226,17 +227,25 @@ const ClubBig = () => {
                         events.map((element) => {
                             return (
                                 <div className='w-1/4 mt-4 mx-2'>
-                                    <Link>
+                                   
                                             <div className="card  bg-base-100 shadow-xl">
-                                                <div className="card-body">
-                                                    <h2 className="card-title">{element.header}</h2>
-                                                    <p>{element.description}</p>
-                                                    <div className="flex justify-between items-center">
-                                                    {(clubIDs.length>0) && clubIDs.includes(element.id) ? <button className="btn btn-error" onClick={() => signOut(element.id)}>Sign Out</button> : <button className="btn btn-primary" onClick={() => signupEvent(element.id, element.header, element.description)}>Sign up</button>}
+  
+                                                    <div className="card-body">
+                                                        <Link to = {`/event/${element.id}?club=${id}`}>
+                                                            <h2 className="card-title">{element.header}</h2>
+                                                            <p className='mt-2'>{element.description}</p>
+                                                            <p className='text-sm mt-3'>{element.date.substring(0,10)}</p>
+                                                            <div className="flex justify-between items-center">
+                                                            
+                                                            </div>
+                                                        </Link>
+                                                        {(clubIDs.length>0) && clubIDs.includes(element.id) ? <button className="btn btn-error w-1/3" onClick={() => signOut(element.id)}>Sign Out</button> : <button className="w-1/3 btn btn-primary" onClick={() => signupEvent(element.id, element.header, element.description)}>Sign up</button>}
                                                     </div>
-                                                </div>
+
+                                               
                                             </div>
-                                    </Link>
+                                    
+                                    
                                 </div>
                             )
                         })
@@ -246,6 +255,7 @@ const ClubBig = () => {
                         </div>
                     
                     }
+                    
 
                     </div>
                 </div>

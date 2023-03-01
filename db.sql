@@ -18,7 +18,8 @@ CREATE TABLE users(
     about varchar(255),
     ownimg boolean,
     image varchar(255),
-    friendrequests integer[]
+    friendrequests integer[],
+    points integer 
 );
 
 
@@ -102,8 +103,7 @@ CREATE TABLE clubs(
     name varchar(250),
     description varchar(500),
     picture varchar(500),
-    memberCount integer,
-    website varchar(500)
+    memberCount integer
 );
 
 CREATE TABLE members(
@@ -118,7 +118,8 @@ CREATE TABLE events(
     header varchar(2500),
     date date,
     club varchar(250),
-    description varchar (2500)
+    description varchar (2500),
+    checkedin boolean
 );
 
 CREATE TABLE signups(
@@ -128,6 +129,11 @@ CREATE TABLE signups(
     clubid integer REFERENCES clubs(id),
     header varchar(2500),
     description varchar (2500)
+);
+
+CREATE TABLE pastevent(
+    id SERIAL PRIMARY KEY,
+    eventid integer
 );
 
 

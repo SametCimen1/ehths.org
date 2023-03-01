@@ -12,7 +12,7 @@ export default function SmallCommunicate({post, type}) {
     const [isItMine, setIsItMine] = useState(false);
 
     const getUser = async() => {
-        const data = await fetch("http://localhost:5000/user/getUserById", {
+        const data = await fetch("/user/getUserById", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ export default function SmallCommunicate({post, type}) {
         const response = await data.json();
         setName(response.name)
 
-        const myPost = await fetch("http://localhost:5000/user/myPost", {
+        const myPost = await fetch("/user/myPost", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export default function SmallCommunicate({post, type}) {
 
     }
     const getImg = async() => {
-        const data = await fetch("http://localhost:5000/user/getimg", {
+        const data = await fetch("/user/getimg", {
           method:"POST",
           headers: {
             'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ export default function SmallCommunicate({post, type}) {
         
 
         if(post.didILike){
-            const data = await fetch("http://localhost:5000/user/unlikepost", {
+            const data = await fetch("/user/unlikepost", {
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ export default function SmallCommunicate({post, type}) {
             window.location.reload(true);
           }
           else{
-            const data = await fetch("http://localhost:5000/user/likepost", {
+            const data = await fetch("/user/likepost", {
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -111,7 +111,7 @@ export default function SmallCommunicate({post, type}) {
     
 
     const deletePost = async() => {
-        const data = await fetch("http://localhost:5000/posts/deletepost", {
+        const data = await fetch("/posts/deletepost", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -130,25 +130,27 @@ export default function SmallCommunicate({post, type}) {
     }
 
     return (
-               <div>
-                                        <div >
-                                        {isItMine && <i onClick = {()=> deletePost()} className ={`${"fas fa-trash-alt"} `}></i>}
+               <div className='border w-1/3'>
+                                        <div className='w-full' >
+                                            {isItMine && <i onClick = {()=> deletePost()} className ={`${"fas fa-trash-alt"} `}></i>}
 
-                                        <div  onClick = {()=> navigate(`/connect/communicate/post?post=${type}&id=${post.id}`)} >
-                                                <div >
-                                                    {img === "" ?<img alt = "user profile" className = {`${"profileImg"}`} src = {'Logo'}></img>: <img  alt = "user profile"  className = {`${"profileImg"}`} src = {`http://localhost:5000/img/${img}`}></img>}
-                                                    {typeof post.groupname !== 'undefined'? <p>c/{post.groupname}  u/{name}</p> : <p>u/{name}</p>}
+                                            <div className='w-full'  onClick = {()=> navigate(`/connect/communicate/post?post=${type}&id=${post.id}`)} >
+                                                    <div className='flex items-center w-full justify-center'>
+                                                        {img === "" ?<img alt = "user profile" className = {`${"profileImg rounded-full"}`} src = {'Logo'}></img>: <img  alt = "user profile"  className = {`${"profileImg rounded-full userPicture"}`} src = {`/img/${img}`}></img>}
+                                                        {typeof post.groupname !== 'undefined'? <p className='font-bold ml-2'>c/{post.groupname}  u/{name}</p> : <p>u/{name}</p>}
 
-                                                </div>
+                                                    </div>
+                                            </div>
                                         </div>
-                                        </div>
-                                        <div  onClick = {()=> navigate(`/connect/communicate/post?post=${type}&id=${post.id}`)}>
-                                                    <p>{post.title}</p>
+
+
+                                        <div className='w-full flex justify-center flex-col  p-4  ' onClick = {()=> navigate(`/connect/communicate/post?post=${type}&id=${post.id}`)}>
+                                                    <p className='font-semibold'>{post.title}</p>
                                                     <p>{post.text}</p>
                                         </div>  
 
 
-                                        <div >
+                                        <div className='flex justify-around'>
                                                         <div onClick = {()=> navigate(`/connect/communicate/post?post=${type}&id=${post.id}`)} >
                                                           <i  className={`${'fas fa-comments'} `}></i>
                                                           <p>{post.comments} comments</p>

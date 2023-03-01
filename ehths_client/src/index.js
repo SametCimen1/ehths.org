@@ -18,7 +18,7 @@ import Profile from './routes/Profile'
 import Clubs from './routes/Clubs';
 import ClubBig from './routes/ClubBig'
 import Admin from './routes/Admin';
-
+import Event from './routes/Event'
 
 
 import Dm from './connect/dm'
@@ -74,22 +74,27 @@ const router = createBrowserRouter([
   //   path: "/connect/communicate/:id",
   //   element: <BigCommunicate></BigCommunicate>
   // },
+ 
+  {
+    path: "/communitie/:id",
+    element: <LongGroups></LongGroups>
+  }, 
   {
     path: "/connect/communities",
     element: <Groups></Groups>
   },
-  {
-    path: "/connect/communitie/:id",
-    element: <LongGroups></LongGroups>
-  },
+ 
   {
     path: "/connect/makefriends",
     element: <MakeFriends></MakeFriends>
-  }
-  ,
+  },
   {
     path: "/admin",
     element: <Admin></Admin>
+  },
+  {
+    path: "/event/:id",
+    element: <Event></Event>
   }
 ]); 
 const root = ReactDOM.createRoot(document.getElementById('root'));

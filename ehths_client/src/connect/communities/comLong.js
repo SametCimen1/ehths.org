@@ -18,7 +18,7 @@ export default function LongGroups() {
     const [amIOwner, setamIOwner] = useState(false) 
 
     const getGroup = async() => {
-       const data = await fetch("http://localhost:5000/user/getsinglegroup", {
+       const data = await fetch("/user/getsinglegroup", {
         method:"POST",
         headers: {
             'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ export default function LongGroups() {
     }, [])
 
     const getAmIOwner = async() => {
-        const data = await fetch("http://localhost:5000/posts/amigroupowner", {
+        const data = await fetch("/posts/amigroupowner", {
             method:"PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ export default function LongGroups() {
         }
     
         else{
-            const data = await fetch("http://localhost:5000/user/groupmakepost", {
+            const data = await fetch("/user/groupmakepost", {
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ export default function LongGroups() {
     }
 
     const getPosts = async() => {
-        const data = await fetch("http://localhost:5000/user/getgroupposts", {
+        const data = await fetch("/user/getgroupposts", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -108,7 +108,7 @@ export default function LongGroups() {
     }
 
     const getcsrf = async() => {
-        const data = await fetch("http://localhost:5000/user/getcsrf", {
+        const data = await fetch("/user/getcsrf", {
           method:"GET",
           headers: {
             'Content-Type': 'application/json'
@@ -126,7 +126,7 @@ export default function LongGroups() {
     
 
     //   const updateGroupImage = async() => {
-    //     const data = await fetch("http://localhost:5000/user/updategroupimage", {
+    //     const data = await fetch("/user/updategroupimage", {
     //         method:"PUT",
     //         headers: {
     //             'Content-Type': 'application/json'
@@ -141,34 +141,40 @@ export default function LongGroups() {
 
 
     return (
-        <div>
+        <div className='container mx-auto'>
             {typeof group === "undefined" ? <h1>Loading</h1> :
-                <div  >
-                    <div>
-                            <div>
-                                <img src = {`http://localhost:5000/img/${group.groupImage}`}></img>
-                                <p>g/ {group.groupName}</p>
+
+                <div className=''>
+
+                    <div className='flex items-center mt-3'>
+                            <div c>
+                                <img className='clubPicture rounded-xl' src = {`/img/${group.groupImage}`}></img>
+
                                 {!group.amIMember && <button>Join</button> }
                             </div>
 
-                            <div >
-                                <p>{group.groupTitle}</p>
-                                <p>{group.groupName}</p>
+                            <div className='ml-2'>
+                                <p className='font-bold text-2xl'>g/ {group.groupName}</p>
+                                <p className='font-bold text-xl'>{group.groupTitle}</p>
+                                <p className='font-normal'>{group.groupName}</p>
                             </div>
                     </div>
 
                         {group.amIMember &&
-                        <div>
-                            <button onClick = {() => {setPost(prev => !prev);setUpdateImageContainer(false)}}>Post Something</button>
-                            {amIOwner && <button onClick = {() => {setUpdateImageContainer(prev => !prev); setPost(false)}}>Update Image</button>}
+                        <div className='mt-3'>
+
+                            <button className='btn bg-blue-500 hover:bg-blue-700' onClick = {() => {setPost(prev => !prev);setUpdateImageContainer(false)}}>Post Something</button>
+                            {amIOwner && <button className=' ml-2 btn btn-ghost border-2 border-blue-500 hover:bg-blue-500'  onClick = {() => {setUpdateImageContainer(prev => !prev); setPost(false)}}>Update Image</button>}
                             {post &&
                             <div>
-                                <div >
-                                  <div>
-                                    <input  onChange = {(e) => setTitle(e.target.value)} type = "text" placeholder='title'></input>
-                                    <input onChange = {(e) => setText(e.target.value)} type = "text" placeholder='your post'></input>
-                                    <button onClick = {() => makePost()}>Post!</button>
+                                <div className='mt-3'>
+                                  
+                                  <div className='flex flex-col w-1/4'>
+                                    <input className='border-2 p-2 w-full' onChange = {(e) => setTitle(e.target.value)} type = "text" placeholder='title'></input>
+                                    <input className='border-2 p-2 w-full mt-2' onChange = {(e) => setText(e.target.value)} type = "text" placeholder='your post'></input>
+                                    <button className='btn bg-blue-500 hover:bg-blue-700 mt-2' onClick = {() => makePost()}>Post!</button>
                                   </div>
+
                                 </div>
                             </div>
                             }
@@ -177,7 +183,7 @@ export default function LongGroups() {
                                                         <div >
                                                           <div >
                                                             <form   id='uploadForm' 
-                                                            action='http://localhost:5000/user/updategroupimage' 
+                                                            action='/user/updategroupimage' 
                                                             method='post' 
                                                             encType="multipart/form-data">
                                                             <input type = "hidden" name ="_csrf" value={csrf}></input>
@@ -196,7 +202,7 @@ export default function LongGroups() {
                         }
 
                         <div>
-                            <h1>Group posts</h1>
+                            <h1 className='font-semibold mt-3'>Group posts</h1>
 
                             {groupPosts.map((elem) => {
                                 return(
@@ -207,6 +213,7 @@ export default function LongGroups() {
                                     </div>
                                 )
                             })}
+                            
                         </div>
 
                 </div>
@@ -216,3 +223,4 @@ export default function LongGroups() {
         </div>
     )
 }
+

@@ -7,7 +7,7 @@
 //     const [img, setImg] = useState("")
 
 //     const getImg = async() => {
-//       const data = await fetch("http://localhost:5000/user/getimg", {
+//       const data = await fetch("/user/getimg", {
 //         method:"POST",
 //         headers: {
 //           'Content-Type': 'application/json'
@@ -35,7 +35,7 @@
 //     return (
 //         <div className = {style.postContainer}>
 //             <div className = {style.userInformation}>
-//             {img === "" ? <img className = {`${style.img} ${"profileImg"}`} src = {Logo}></img> : <img className = {`${style.img} ${"profileImg"}`} src = {`http://localhost:5000/img/${img}`}></img>}
+//             {img === "" ? <img className = {`${style.img} ${"profileImg"}`} src = {Logo}></img> : <img className = {`${style.img} ${"profileImg"}`} src = {`/img/${img}`}></img>}
               
 //               <p>{post.username}</p>
 //             </div>

@@ -13,7 +13,7 @@ export default function MakeFriends() {
     
 
     const getDefaultPosts = async() => {
-       const data = await fetch("http://localhost:5000/user/getDefaultPosts", {
+       const data = await fetch("/user/getDefaultPosts", {
         method:"POST",
         headers: {
         'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ export default function MakeFriends() {
         }
         else{
             setError("")
-            const data = await fetch("http://localhost:5000/user/makePost", {
+            const data = await fetch("/user/makePost", {
                 method:"POST",
               headers: {
                 'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ export default function MakeFriends() {
 
     const getMoreFriendPost = async() => {
 
-          const data = await fetch("http://localhost:5000/user/getDefaultPosts", {
+          const data = await fetch("/user/getDefaultPosts", {
               method:"POST",
               headers: {
                   'Content-Type': 'application/json'

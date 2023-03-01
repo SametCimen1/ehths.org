@@ -32,7 +32,7 @@ export default function BigCommunicate() {
 
     
     const getPost = async() => {
-        const data = await fetch("http://localhost:5000/user/getpostbyid", {
+        const data = await ("/user/getpostbyid", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ export default function BigCommunicate() {
     const getUser = async() => {
 
         if(post.userid){
-            const data = await fetch("http://localhost:5000/user/getUserById", {
+            const data = await fetch("/user/getUserById", {
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ export default function BigCommunicate() {
 
     
     const getComments = async() => {
-            const data = await fetch("http://localhost:5000/posts/getcomments", {
+            const data = await fetch("/posts/getcomments", {
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ export default function BigCommunicate() {
 
     const amITheOwner = async() => {
 
-        const myPost = await fetch("http://localhost:5000/user/myPost", {
+        const myPost = await fetch("/user/myPost", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -113,7 +113,7 @@ export default function BigCommunicate() {
             alert("enter input")
         }
         else{
-            const data = await fetch("http://localhost:5000/posts/makeComment", {
+            const data = await fetch("/posts/makeComment", {
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -138,7 +138,7 @@ export default function BigCommunicate() {
      
     const likePost = async() => {
         if(post.didILike){
-          const data = await fetch("http://localhost:5000/user/unlikepost", {
+          const data = await fetch("/user/unlikepost", {
               method:"POST",
               headers: {
                   'Content-Type': 'application/json'
@@ -153,7 +153,7 @@ export default function BigCommunicate() {
           window.location.reload(true);
         }
         else{
-          const data = await fetch("http://localhost:5000/user/likepost", {
+          const data = await fetch("/user/likepost", {
               method:"POST",
               headers: {
                   'Content-Type': 'application/json'
@@ -170,7 +170,7 @@ export default function BigCommunicate() {
        
       }
       const deletePost = async() => {
-        const data = await fetch("http://localhost:5000/posts/deletepost", {
+        const data = await fetch("/posts/deletepost", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -195,7 +195,7 @@ export default function BigCommunicate() {
               <div >
                  
                    <div >
-                       {image === "" ? <img  alt = "user profile " className = {` ${"profileImg"}`} src = {'Logo'}></img> : <img alt = "user profile "  className = {` ${"profileImg"}`} src = {`http://localhost:5000/img/${image}`}></img>}
+                       {image === "" ? <img  alt = "user profile " className = {` ${"profileImg"}`} src = {'Logo'}></img> : <img alt = "user profile "  className = {` ${"profileImg"}`} src = {`/img/${image}`}></img>}
                        <p onClick = {()=> navigate(`/user/${post.userid}`)}>u/{name}</p>
 
                    </div>

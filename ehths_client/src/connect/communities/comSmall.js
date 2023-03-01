@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function SmallGroups({group}) {
 
     const joinGroup = async() => {
-        const data = await fetch("http://localhost:5000/user/joinGroup", {
+        const data = await fetch("/user/joinGroup", {
            method:"POST",
            headers: {
                'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ export default function SmallGroups({group}) {
             <div className='w-1/12 mt-4 mx-2'>
                 <Link to = {`http://localhost:3000/communitie/${group.id}`}>
                     <div className="card w-96 bg-base-100 shadow-xl">
-                    <figure>{group.groupimage === "" ? <img src = {'Logo'}/> : <img className='w-1/2 bg-info'  src = {`http://localhost:5000/img/${group.groupimage}`}></img>}</figure>
+                    <figure>{group.groupimage === "" ? <img src = {'Logo'}/> : <img className='w-1/4 bg-cover bg-info'  src = {`/img/${group.groupimage}`}></img>}</figure>
                     <div className="card-body">
                         <h2 className="card-title">{group.groupTitle}</h2>
                         <p>{group.groupDescription}</p>

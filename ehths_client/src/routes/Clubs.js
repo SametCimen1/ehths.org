@@ -6,7 +6,7 @@ const Clubs = () => {
 
     const getClubs = async() => {
         console.log('making the call')
-        const data = await fetch("http://localhost:5000/getClubs")
+        const data = await fetch("/getClubs")
         const res = await data.json();
         setClubs(res)
     }
@@ -21,7 +21,7 @@ const Clubs = () => {
         <div className='container mx-auto'>
             <div className='text-center'>
                 <h1 className = "text-2xl font-bold">Clubs</h1>
-                <p>Join clubs to earn point and build your resume. <a className = "link text-blue-500" href = "http://localhost:3000/clubbenefits">See how clubs can help you in day-to-day life</a></p>
+                <p>Join clubs to earn point and build your resume. <a className = "link text-blue-500" href = "/clubbenefits">See how clubs can help you in day-to-day life</a></p>
             </div>
             <div className='flex items-center'>
 
@@ -30,7 +30,7 @@ const Clubs = () => {
                         <div className='w-1/4 mt-4 mx-2'>
                             <Link to = {`http://localhost:3000/club/${elem.id}`}>
                                 <div className="card w-96 bg-base-100 shadow-xl">
-                                <figure><img src = {elem.picture} alt="Shoes" /></figure>
+                                <figure><img src = {elem.picture} alt="Club Picture" /></figure>
                                 <div className="card-body">
                                     <h2 className="card-title">{elem.name}</h2>
                                     <p>{elem.description}</p>

@@ -25,7 +25,7 @@ export default function Communicate() {
     },[])
 
     const getFriendPosts = async() => {
-        const data = await fetch("http://localhost:5000/user/getFriendPosts", {
+        const data = await fetch("/user/getFriendPosts", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ export default function Communicate() {
 
     
     const getCommunitiePosts = async() => {
-        const data = await fetch("http://localhost:5000/user/getCommunitiePosts", {
+        const data = await fetch("/user/getCommunitiePosts", {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -61,7 +61,7 @@ export default function Communicate() {
         alert("please fill in the fields")
       }
       else{
-            const data  = await fetch("http://localhost:5000/user/makeFriendPost", {
+            const data  = await fetch("/user/makeFriendPost", {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ export default function Communicate() {
 
 
     const getMoreFriendPost = async() => {
-            const data = await fetch("http://localhost:5000/user/getFriendPosts", {
+            const data = await fetch("/user/getFriendPosts", {
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -119,7 +119,7 @@ export default function Communicate() {
     }
 
     const getPopulerPosts = async() => {
-        const data = await fetch("http://localhost:5000/posts/getpopuler",{
+        const data = await fetch("/posts/getpopuler",{
             method:"PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -134,7 +134,7 @@ export default function Communicate() {
     }
 
     const getMorePopuler = async() => {
-        const data = await fetch("http://localhost:5000/posts/getmorepopuler",{
+        const data = await fetch("/posts/getmorepopuler",{
             method:"PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -151,7 +151,7 @@ export default function Communicate() {
 
     const getCommunity = async() => {
         
-        const data = await fetch("http://localhost:5000/user/getCommunities",{
+        const data = await fetch("/user/getCommunities",{
                 method:"GET",
                 headers: {
                     'Content-Type': 'application/json'
@@ -249,7 +249,7 @@ export default function Communicate() {
                         {communities.map((element) =>{
                             return(
                                 <div onClick = {() => navigate(`/connect/communitie/${element.id}`)} >
-                                    <img alt = "group profile" src = {`http://localhost:5000/img/${element.groupimage}`}></img>
+                                    <img alt = "group profile" src = {`/img/${element.groupimage}`}></img>
                                     <p>{element.groupname}</p>
                                 </div>
                             )

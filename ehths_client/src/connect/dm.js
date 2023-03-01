@@ -15,7 +15,7 @@ export default function Dm() {
 
 
     const getGroups = async() => {
-        const data = await fetch("http://localhost:5000/user/getGroups", {
+        const data = await fetch("/user/getGroups", {
           method:"POST",
           headers: {
             'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ export default function Dm() {
 
 
     const getFriends = async() => {
-        const data = await fetch("http://localhost:5000/user/getFriends", {
+        const data = await fetch("/user/getFriends", {
           method:"POST",
           headers: {
             'Content-Type': 'application/json'
@@ -82,15 +82,15 @@ export default function Dm() {
 
                 <div>
                  {(friends.length > 0 ) && (searchName === "")   ?   
-                  <div>
+                  <div className='mt-5'>
    
                     {friends.map((elem) => {
 
                       const normalName = elem.name.replaceAll(" ", "_")
                       return(
-                        <div key = {elem.name} onClick = {() => navigate(`/connect/dm/to/${normalName}`)}>
-                            {elem.ownimg ? <img src = {`http://localhost:5000/img/${elem.image}`}></img> : <img src = {'Logo'}></img>}
-                            <p>{elem.name}</p>
+                        <div className = "w-1/4  cursor-pointer hover:bg-gray-100 flex items-center" key = {elem.name} onClick = {() => navigate(`/connect/dm/to/${normalName}`)}>
+                            {elem.ownimg ? <img className = "rounded-xl w-1/4" src = {`/img/${elem.image}`}></img> : <img src = {'Logo'}></img>}
+                            <p className= 'ml-2'>{elem.name}</p>
                         </div>
                       )
                     
@@ -112,7 +112,7 @@ export default function Dm() {
                           const normalName = elem.name.replaceAll(" ", "_")
                           return(
                             <div key = {elem.name} onClick = {() => navigate(`/connect/dm/to/${normalName}`)}>
-                                {elem.ownimg ? <img src = {`http://localhost:5000/img/${elem.image}`}></img> : <img src = {'Logo'}></img>}
+                                {elem.ownimg ? <img src = {`/img/${elem.image}`}></img> : <img src = {'Logo'}></img>}
                                 <p>{elem.name}</p>
                             </div>
                           )

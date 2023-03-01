@@ -27,7 +27,7 @@ export default function HomeUser() {
 
 
     const getData = async() => {
-      const data = await fetch("http://localhost:5000/user/getUser", {
+      const data = await fetch("/user/getUser", {
         method:"POST",
         headers: {
           'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export default function HomeUser() {
     }
 
     const getMyClubs = async() => {
-      const data = await fetch("http://localhost:5000/getmyclubs", {
+      const data = await fetch("/getmyclubs", {
         method:"POST",
         headers: {
           'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ export default function HomeUser() {
     }
 
     const getmyevents = async() => {
-    const data = await fetch("http://localhost:5000/getmyevents", {
+    const data = await fetch("/getmyevents", {
         method:"POST",
         headers: {
           'Content-Type': 'application/json'
@@ -174,14 +174,14 @@ export default function HomeUser() {
                <div>
                   
                   <div className = "text-center">
-                    <h1 className = "font-bold text-3xl">Your Events</h1>
+                    <h1 className = "font-bold text-3xl">Your Upcoming Events</h1>
                   </div>
                   <div className='flex flex-wrap'>
                     {mySignUps.length === 0 ? <div><p>You do not have any events yet!</p></div> :mySignUps.map((element) => {
                       return(
-                        <div className='w-1/2 mt-4 justify-center  mx-auto'>
+                        <div className='w-1/2 mt-4 justify-center  mx-auto '>
                           <Link>
-                                  <div className="card w-10/12 bg-base-100 shadow-xl">
+                                  <div className="card w-10/12 bg-base-100 shadow-xl linkCard">
                                       <div className="card-body">
                                           <h2 className="card-title">{element.header}</h2>
                                           <p>{element.description}</p>
@@ -199,7 +199,7 @@ export default function HomeUser() {
                   <div className = "flex justify-between mt-3 cursor-pointer hover:bg-gray-100 p-3" onClick={() => navigate("/profile")} >
                     
                      <div className = "w-1/4">
-                       {user.ownimg ? <img className = "profileImg rounded" src = {`http://localhost:5000/img/${user.image}`}></img> : <img src = 'slide1.png'></img>}
+                       {user.ownimg ? <img className = "profileImg rounded" src = {`/img/${user.image}`}></img> : <img src = 'slide1.png'></img>}
                      </div>
                      
 
@@ -258,7 +258,7 @@ export default function HomeUser() {
                         <div className='w-1/4 mt-4 mx-2'>
                           <Link to = {`http://localhost:3000/club/${elem.id}`}>
                             <div className="card w-96 bg-base-100 shadow-xl">
-                            <figure><img src = {elem.picture} alt="Shoes" /></figure>
+                            <figure><img src = {elem.picture} alt="Club Picture" /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{elem.name}</h2>
                                 <p className='text-left'>{elem.description}</p>
