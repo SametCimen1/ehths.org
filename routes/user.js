@@ -328,7 +328,7 @@ router.get("/getcsrf", csrfProtection, async(req,res) => {
     res.json(req.csrfToken())    
 })
 
-router.post("/updateData", csrfProtection, async(req,res) => {
+router.post("/updateData", async(req,res) => {
     const user = req.user;
     
 

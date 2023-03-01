@@ -411,7 +411,6 @@ export default function Profile() {
                   method="post"
                   encType="multipart/form-data"
                 >
-                  <input type="hidden" name="_csrf" value={csrf} />
                   <div>
                     <p className='block text-gray-500 text-sm'>Update Abot</p>
                     <div className=''>
