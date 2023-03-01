@@ -24,7 +24,7 @@ router.post('/signup', async(req,res) => {
                                 // const lowerCaseName = assignedName.toLowerCase();
                                 
 
-                                const makeUser = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests, points) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12, $13)",[email, hashPassword, 'user', true, '', name, [], email,'', false, '', [], 0])
+                                const makeUser = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests, points) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12, $13)",[email, hashPassword, 'user', true, '', name, [], email,'', false, 'https://imgs.search.brave.com/XTGney9JLcVgVMrsKMgRhNbpnACNv6_5vhWvhF-u5IU/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly93d3cu/cG5nYXJ0cy5jb20v/ZmlsZXMvMTAvRGVm/YXVsdC1Qcm9maWxl/LVBpY3R1cmUtUE5H/LURvd25sb2FkLUlt/YWdlLnBuZw', [], 0])
                                 return res.status(200).json("sent a verification link to your email. Please check it")
                             }
 
