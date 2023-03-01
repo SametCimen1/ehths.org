@@ -11,7 +11,7 @@ const verifyToken = require('./routes/verifyToken')
 const cookieParser = require('cookie-parser')
 const pool = require('./Pool')
 const jwt = require('jsonwebtoken');
-
+var path = require('path');
 const fileUpload = require('express-fileupload');
 // const socketio = require('socket.io');
 // const http = require('http');
