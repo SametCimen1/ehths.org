@@ -6,7 +6,7 @@ const Clubs = () => {
 
     const getClubs = async() => {
         console.log('making the call')
-        const data = await fetch("/getClubs")
+        const data = await fetch("http://localhost:5000/getClubs")
         const res = await data.json();
         setClubs(res)
     }

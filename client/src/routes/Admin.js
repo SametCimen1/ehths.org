@@ -30,12 +30,12 @@ const Admin = () => {
           setUser(response);
           
         
-          const data2 = await fetch("/getClubs")
+          const data2 = await fetch("http://localhost:5000/getClubs")
           const res2 = await data2.json();
           setClubs(res2);
 
                   
-          const data3 = await fetch("/getEverything")
+          const data3 = await fetch("http://localhost:5000/getEverything")
           const res3 = await data3.json();
           setStudents(res3);
 
