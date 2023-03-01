@@ -30,12 +30,27 @@ const Admin = () => {
           setUser(response);
           
         
-          const data2 = await fetch("http://localhost:5000/getClubs")
+          const data2 = await fetch("/getClubs", {
+            method:"POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include'
+          })
           const res2 = await data2.json();
           setClubs(res2);
 
                   
-          const data3 = await fetch("http://localhost:5000/getEverything")
+          const data3 = await fetch("/getEverything", {
+            method:"POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include'
+          })
+          
           const res3 = await data3.json();
           setStudents(res3);
 

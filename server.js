@@ -84,11 +84,11 @@ app.post('/userexist', async(req,res) => {
     }
 })
 
-app.get("/getClubs",  async(req,res) => {
+app.post("/getClubs",  async(req,res) => {
     const data = await pool.query("SELECT * FROM clubs")
     res.json(data.rows)
 })
-app.get("/getEverything",  async(req,res) => {
+app.post("/getEverything",  async(req,res) => {
     const data = await pool.query("SELECT * FROM users")
     res.json(data.rows)
 })
