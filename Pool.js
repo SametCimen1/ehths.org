@@ -11,7 +11,10 @@ dotenv.config();
 // })
 
 const proConfig = {
-    connectionString: 'postgresql://doadmin:AVNS_AUCa9LL9ckulwN8nq96@db-postgresql-nyc1-47053-do-user-9652811-0.b.db.ondigitalocean.com:25060/defaultdb'
+    connectionString:'postgresql://doadmin:AVNS_AUCa9LL9ckulwN8nq96@db-postgresql-nyc1-47053-do-user-9652811-0.b.db.ondigitalocean.com:25060/defaultdb?sslmode=require',
+    ssl: {
+        rejectUnauthorized: false
+    }
 }
 
 const pool = new Pool(proConfig)
