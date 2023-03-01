@@ -257,12 +257,12 @@ const ClubBig = () => {
                 <div>
                     <div className='w-1/2 flex '>
 
-                        {Admin && 
-                            <div>
-                                <button className='mr-2  border-2 border-blue-500 p-2 rounded w-1/3' onClick = {() => setCreateEventDrop(!createEventDrop)}>Create an Event</button>
-                                <button className='mr-2 btn btn-error' onClick={() => deleteClub(club.id)}>Delete the Club</button>
-                            </div>
-                        }
+                        
+                            
+                                {Admin && <button className='mr-2  border-2 border-blue-500 p-2 rounded w-1/3' onClick = {() => setCreateEventDrop(!createEventDrop)}>Create an Event</button>}
+                                {Admin &&<button className='mr-2 btn btn-error w-1/3' onClick={() => deleteClub(club.id)}>Delete the Club</button> }
+                            
+                        
                         {!alreadyIn ? <button className="btn btn-primary w-1/3" onClick = {() => joinGroup(club.id)}>Join</button> : <button className='border-2 border-red-500 p-2 rounded w-1/3' onClick = {() => leaveClub(club.id)}>Leave</button>}
                     
                     </div>

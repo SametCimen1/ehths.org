@@ -116,6 +116,7 @@ app.post("/deleteClub",  async(req,res) => {
     const id = req.body.id;
     console.log("DELETING CLUB", userId)
     const data2 = await pool.query("DELETE FROM events WHERE clubid = $1", [id])
+    const data3 = await pool.query("DELETE FROM members WHERE clubid = $1", [id])
     const data = await pool.query("DELETE FROM clubs WHERE id = $1", [id])
     res.json(data.rows[0])
 })
