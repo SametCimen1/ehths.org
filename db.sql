@@ -1,4 +1,5 @@
 CREATE DATABASE ehths 
+
 CREATE TABLE whitelist(
   id SERIAL PRIMARY KEY,
   email varchar(200) NOT NULL UNIQUE,
