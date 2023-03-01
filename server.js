@@ -130,7 +130,7 @@ app.post("/getevents",  async(req,res) => {
     res.json(data.rows)
 })
 app.post("/getAllEvents",  async(req,res) => {
-    const data = await pool.query("SELECT * FROM events WHERE checkedin = false", [req.body.id])
+    const data = await pool.query("SELECT * FROM events WHERE checkedin = false")
     res.json(data.rows)
 })
 
