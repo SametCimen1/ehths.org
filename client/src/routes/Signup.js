@@ -7,7 +7,7 @@ export default function Signup() {;
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [passwordAgain, setPasswordAgain] = useState('');
-    const [name, setName] = useState({value: false});
+    const [name, setName] = useState('');
     const [response, setResponse] = useState("")
 
     const signUpRequest = async(e) => {
@@ -45,8 +45,9 @@ export default function Signup() {;
         }
     }
   return (
-    <div className='flex justify-center items-start '>
-                <div className='rounded-0 border p-5 mt-5  w-30 shadow-xl'>
+    <div className='flex justify-center items-start w-full'>
+        <div className='rounded-0 border p-5 mt-5 w-full mx-2 lg:w-1/3   bg-dark shadow-xl'>
+
                 <h1 className='text-center text-xl font-bold'>Sign Up</h1>
                 
 
@@ -66,7 +67,7 @@ export default function Signup() {;
                         <label class="block text-gray-500 text-sm " for="username">
                             Name   
                         </label>
-                        <input value = {name} onChange = {(e) => setName(e.target.value)} type="password" class="bg-gray-100 appearance-none border rounded w-full py-2 px-3 text-gray-700  focus:shadow-outline" id="password" placeholder="Name" />
+                        <input value = {name} onChange = {(e) => setName(e.target.value)} type="text" class="bg-gray-100 appearance-none border rounded w-full py-2 px-3 text-gray-700  focus:shadow-outline" id="password" placeholder="Name" />
                     </div>
 
                     <div class="mb-3">
