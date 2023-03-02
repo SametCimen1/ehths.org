@@ -27,6 +27,7 @@ export default function Groups() {
     const [groups, setGroups] = useState([]);
     const [myGroups, setMyGroups] = useState([]);
     const [makeYourGroup, setMakeYourGroup] = useState(false);
+    
     let smallestMyGroupIndex = Number.MAX_SAFE_INTEGER;
     let smallestGroupIndex = Number.MAX_SAFE_INTEGER;
 

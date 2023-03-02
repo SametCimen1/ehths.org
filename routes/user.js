@@ -330,9 +330,6 @@ router.get("/getcsrf", csrfProtection, async(req,res) => {
 
 router.post("/updateData", async(req,res) => {
     const user = req.user;
-    
-
-    
     if(user){
         if((req.files && Object.keys(req.files).length !== 0) && req.body.about ===""){ 
             uploadImg(req.files,user._id)
@@ -361,7 +358,7 @@ router.post("/makegroup", async(req,res) => {
         const user = req.user;
 
         if(user){
-            if((req.files && Object.keys(req.files).length !== 0) && req.body.groupName !=="" &&  req.body.groupTitle !==""&& req.body.groupDescription !=="" ){ 
+            if( req.body.newimg !== "" && req.body.groupName !== "" &&  req.body.groupTitle !==""&& req.body.groupDescription !== "" ){ 
                 uploadImg(req.files, req.user._id, true, req.body)            
                 res.redirect(`/connect/communities`);
                 
@@ -379,13 +376,14 @@ router.post("/makegroup", async(req,res) => {
 
 router.post("/updategroupimage", async(req,res) => {
     const user = req.user;
+    console.log("making new community")
+    console.log(user)
     console.log(req.body)
+    
 
         if(user){
             if((req.files && Object.keys(req.files).length !== 0)){ 
-                updategroupImage(req.files, req.body.groupid)            
-                res.redirect(`/connect/communities`);
-                
+                const updateImg = await pool.query('INSERT INTO groups(groupname, members, grouptitle, groupdescription, postsid, groupimage, createdby) VALUES($1, $2, $3, $4, $5, $6, $7)', [req.body.groupName, [user.id], req.body.groupTitle, req.body.groupDescription, [], req.body.newimg, user.id]);
             }
             else{
                 res.json("empty fields")

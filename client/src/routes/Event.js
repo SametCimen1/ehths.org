@@ -65,7 +65,7 @@ const Event = () => {
       credentials: 'include',
       body: JSON.stringify({
         givePoint,
-        eventPoint:points
+        eventPoint:Number(points)
       })
     })
 
