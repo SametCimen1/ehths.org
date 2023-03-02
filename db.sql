@@ -35,10 +35,10 @@ CREATE TABLE groups(
     id SERIAL PRIMARY KEY,
     groupName varchar(255) NOT NULL,
     members integer[],
-    groupTitle varchar(200)  NOT NULL,
-    groupDescription varchar(500) NOT NULL,
+    groupTitle varchar(2000)  NOT NULL,
+    groupDescription varchar(5000) NOT NULL,
     postsid integer[],
-    groupimage varchar(200),
+    groupimage varchar(2000),
     createdby integer REFERENCES users(id)
 );
 
