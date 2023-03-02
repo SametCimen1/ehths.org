@@ -247,19 +247,19 @@ router.post('/sendFriendRequestbycode', async(req,res) => {
 
     if(id && userId){
         try {
-                 const doesItExist = await pool.query("SELECT * FROM users WHERE add_id = $1 AND  $2 = ANY (friendrequests)", [userId, id]);
+                 const doesItExist = await pool.query("SELECT * FROM users WHERE email = $1 AND  $2 = ANY (friendrequests)", [userId, id]);
                  if(doesItExist.rowCount > 0){
 
                    return res.status(400).json("already sent")
                 }
             
                 else{
-                    const doesUserExist = await pool.query("SELECT * FROM users WHERE add_id = $1", [req.body.friendCode]);
+                    const doesUserExist = await pool.query("SELECT * FROM users WHERE email = $1", [req.body.friendCode]);
                     if(doesUserExist.rows[0].id === id){
                         return res.status(500).json("You can not send request to yourself")
                     }
                      else if(doesUserExist.rowCount > 0){
-                    const data = await pool.query('UPDATE users SET friendrequests = array_append(friendrequests, $1) WHERE add_id = $2', [id, userId]);
+                    const data = await pool.query('UPDATE users SET friendrequests = array_append(friendrequests, $1) WHERE email = $2', [id, userId]);
                       return res.status(400).json("SENT")
                     }
                       else{

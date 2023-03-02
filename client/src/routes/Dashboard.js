@@ -135,7 +135,7 @@ export default function HomeUser() {
                       </div>
                     </div>
                     </Link>
-                    
+{/*                     
                     <Link to = "/connect/makefriends">
                     <div className=' hover:rounded cursor-pointer mr-2 '>
                       <div className = "mt-2 card ">
@@ -147,7 +147,7 @@ export default function HomeUser() {
                         </div>
                       </div>
                     </div>
-                    </Link>
+                    </Link> */}
 
                     <Link to = "https://eggharbornj.infinitecampus.org/campus/portal/eggharbor.jsp">
                     <div className=' hover:rounded cursor-pointer mr-2 '>
@@ -288,7 +288,7 @@ export default function HomeUser() {
 
             
 
-{/* 
+
             <div className='mt-4 mb-4 p-2'>                
             
                 <div className = "text-center">
@@ -298,7 +298,7 @@ export default function HomeUser() {
 
                 </div>
             
-            </div> */}
+            </div>
 
 
 
