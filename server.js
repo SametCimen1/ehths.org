@@ -85,8 +85,23 @@ app.post('/userexist', async(req,res) => {
 })
 
 app.post("/getClubs",  async(req,res) => {
-    const data = await pool.query("SELECT * FROM clubs")
-    res.json(data.rows)
+    const userId = await getUserIndex(req);
+    if(userId === false){
+        const data = await pool.query("SELECT * FROM clubs")
+        res.json(data.rows)
+    }
+    else{
+        const data = await pool.query("SELECT * FROM members WHERE userid != $1", [userid])
+        console.log("GET CLUBS USER SIGNED IN", data)
+        const arr = [];
+        for(let i = 0; i<data.rowCount; i++){
+            const myData = await pool.query("SELECT * FROM clubs WHERE id = $1", [data.rows[i].clubid])
+            console.log("my data", myData)
+            arr.push(myData.rows)
+        }
+        res.json(data.rows)
+    }
+
 })
 app.post("/getEverything",  async(req,res) => {
     const data = await pool.query("SELECT * FROM users")
