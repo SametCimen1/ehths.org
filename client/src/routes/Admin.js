@@ -11,11 +11,18 @@ const Admin = () => {
     const [students, setStudents] = useState(undefined)
     const [events, setEvents] = useState([])
     const [eventsHide, setEventsHide] = useState(false)
-
+    const [createIsStudent, setIsCreateStudent] = useState(false)
     const [clubName, setClubName] = useState('');
     const [clubDescription, setClubDescription] = useState('');
     const [IMGurl, setIMGurl] = useState('');
 
+
+
+    const [studentEmail, setStudentEmail] = useState('');
+    const [studentName, setStudentName] = useState('');
+    const [studentPassword, setStudentPassword] = useState('');
+    const [studentRole, setStudentRole] = useState('');
+    const [studentImage, setStudentImage] = useState('');
 
     const getUser = async() => {
         const data = await fetch("/user/getUser", {
@@ -31,7 +38,7 @@ const Admin = () => {
           setUser(response);
           
         
-          const data2 = await fetch("/getClubs", {
+          const data2 = await fetch("/getAllClubs", {
             method:"POST",
             headers: {
               'Content-Type': 'application/json'
@@ -53,6 +60,12 @@ const Admin = () => {
           })
           
           const res3 = await data3.json();
+          console.log('res3', res3);
+          res3.sort(function(a, b) {
+            return b.points - a.points;
+          });
+          console.log('res3again', res3);
+
           setStudents(res3);
 
           const data4 = await fetch("/getAllEvents", {
@@ -97,6 +110,34 @@ const Admin = () => {
     useEffect(() => {
         getUser()
     },[])
+
+
+
+    const createStudent = async() => {
+        const data = await fetch("/createStudent", {
+            method:"POST",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+            body: JSON.stringify({
+                studentName, 
+                studentEmail,
+                studentPassword,
+                studentRole,
+                studentImage
+            })
+        });
+        const res = await data.json();
+        if(res === 'error'){
+            alert("error occured, please try again later")
+        }
+        else{
+            alert("successfuly created the user, refreshing the page")
+            window.location.reload(true)
+        }
+    }
     
     return (
         <div>
@@ -164,9 +205,34 @@ const Admin = () => {
 
                         <div>
                             <div className='text-center justify-center flex items-center mt-10'>
-                                <p className='font-bold text-xl'>Students & users</p>
+                                <p className='font-bold text-xl'>Students & users (sorted by highest points)</p>
                                 <button className='p-1 px-2 rounded-xl bg-gray-200 hover:bg-gray-400 ml-3' onClick = {() => setStudentHide(!studentHide)}>{studentHide === false ? 'Hide' : 'Show' }</button>
+                                <button className='p-1 px-2 rounded-xl bg-gray-200 hover:bg-gray-400 ml-3' onClick = {() => setIsCreateStudent(!createIsStudent)}>{createIsStudent === false ? 'Create' : 'Cancel' }</button>
                             </div>
+
+                            {createIsStudent &&
+                                <div>
+                                        <div className='w-1/3 mt-3 py-2 bg-gray-100 p-2'>
+                                            <div className=''>
+                                                <input className='border-2 p-2 w-full' type = "text" placeholder='User or Student Name' onChange = {(e) => setStudentName(e.target.value)}></input>
+                                            </div>
+                                            <div className='mt-2'>
+                                                <input className='border-2 p-2 w-full' type = "text" placeholder='Email'  onChange = {(e) => setStudentEmail(e.target.value)}></input>
+                                            </div>
+                                            <div className='mt-2'>
+                                                <input className='border-2 p-2 w-full' type = "password" placeholder='Password'  onChange = {(e) => setStudentPassword(e.target.value)}></input>
+                                            </div>
+                                            <div className='mt-2'>
+                                                <input className='border-2 p-2 w-full' type = "text" placeholder='Role (admin or student)'  onChange = {(e) => setStudentRole(e.target.value)}></input>
+                                            </div>
+                                            <div className='mt-2'>
+                                                <input className='border-2 p-2 w-full' type = "text" placeholder='Image URL'  onChange = {(e) => setStudentImage(e.target.value)}></input>
+                                            </div>
+                                            
+                                            <button className='mt-2  border-2 border-blue-500 p-2 rounded w-full' onClick = {() => createStudent()}>Create an Event</button>
+                                        </div>
+                                </div>
+                            }
                             <div>
                                 {(students !== undefined && studentHide === false) && students.map((friend) => {
                                     return(
@@ -230,6 +296,40 @@ const Admin = () => {
                                             
                             </div>
                         </div>
+
+
+
+                        
+                        <div>
+                            <div className='text-center justify-center flex items-center mt-10'>
+                                <p className='font-bold text-xl'>Pick a random winner</p>
+                                <button className='p-1 px-2 rounded-xl bg-gray-200 hover:bg-gray-400 ml-3' onClick = {() => setEventsHide(!eventsHide)}>{eventsHide === false ? 'Hide' : 'Show' }</button>
+                            </div>
+                            <div>
+                                {(events !== undefined && eventsHide === false) && events.map((elem) => {
+                                    return(
+                                        <div className='w-1/4 mt-4 mx-2'>
+                                        <Link to = {`/club/${elem.id}`}>
+                                          <div className="card w-96 bg-base-100 shadow-xl">
+                                          <figure><img src = {elem.picture} alt="Club Picture" /></figure>
+                                          <div className="card-body">
+                                              <h2 className="card-title">{elem.name}</h2>
+                                              <p className='text-left'>{elem.description}</p>
+                                              {/* <div className="flex justify-between items-center">
+                                                  <button className="btn btn-primary">Visit</button>
+                                                  <p className='ml-3'>40 Members</p>
+                                              </div> */}
+                                          </div>
+                                          </div>
+                                        </Link>
+                                      </div>
+                                    )
+                                })}
+                                            
+                            </div>
+                        </div>
+
+                        
 
                         
                     </div>

@@ -46,6 +46,7 @@ export default function DmTalk() {
             credentials: 'include',
           });
           const response = await data.json();
+          console.log("PORT NUMBER", response)
           setPORT(response);
       }
 

@@ -13,6 +13,7 @@ const pool = require('./Pool')
 const jwt = require('jsonwebtoken');
 var path = require('path');
 const fileUpload = require('express-fileupload');
+const bcrypt = require('bcryptjs');
 // const socketio = require('socket.io');
 // const http = require('http');
 
@@ -88,20 +89,32 @@ app.post("/getClubs",  async(req,res) => {
     const userId = await getUserIndex(req);
     console.log('userid', userId)
     if(userId === false){
-        const data = await pool.query("SELECT * FROM clubs")
+        const data = await pool.query("SELECT * FROM clubs");
         res.json(data.rows)
     }
     else{
         const data = await pool.query("SELECT * FROM members WHERE userid != $1", [userId])
         console.log("GET CLUBS USER SIGNED IN", data)
-        const arr = [];
-        for(let i = 0; i<data.rowCount; i++){
-            const myData = await pool.query("SELECT * FROM clubs WHERE id = $1", [data.rows[i].clubid])
-            console.log("my data", myData)
-            arr.push(myData.rows)
+        if(data.rowCount === 0){
+            const data = await pool.query("SELECT * FROM clubs");
+        }else{
+            const arr = [];
+            for(let i = 0; i<data.rowCount; i++){
+                const myData = await pool.query("SELECT * FROM clubs WHERE id = $1", [data.rows[i].clubid]);
+                console.log("my data", myData)
+                arr.push(myData.rows)
+            }
+            res.json(arr)
         }
-        res.json(arr)
+
     }
+
+})
+
+app.post("/getAllClubs",  async(req,res) => {
+    const userId = await getUserIndex(req);
+    const data = await pool.query("SELECT * FROM clubs");
+    res.json(data.rows)
 
 })
 app.post("/getEverything",  async(req,res) => {
@@ -153,6 +166,18 @@ app.post("/deleteClub",  async(req,res) => {
 
 })
 
+app.post('/createStudent', async(req,res) => {
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(req.body.studentPassword, salt);
+
+        const data = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12)",[req.body.studentEmail, hashPassword, req.body.studentRole, true, '', req.body.studentName, [], req.body.studentEmail, '', false, req.body.studentImage, []]);
+        res.json('ok')
+    } catch (error) {
+        console.log('creating student error', error)
+        res.json('error')
+    }
+})
 
 app.post("/getamiadmin", async(req,res) => {
     const userId = await getUserIndex(req);
