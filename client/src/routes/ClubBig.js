@@ -117,7 +117,14 @@ const ClubBig = () => {
               id
             })
         })
-        alert("Joined the Club successfully")
+        const res = await data.json();
+        if(res === 'ok'){
+            alert("Joined the Club successfully")
+        }
+        else{
+            alert("Error occured, make sure you are signed in")
+        }
+ 
         window.location.reload(true);
     }
 

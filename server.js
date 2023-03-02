@@ -99,10 +99,16 @@ app.post("/getClubInfo",  async(req,res) => {
     res.json(data.rows[0])
 })
 app.post("/joinClub",  async(req,res) => {
-    const userId = await getUserIndex(req);
-    const id = req.body.id;
-    const data = await pool.query("INSERT INTO members(userid, clubid) VALUES($1, $2)", [userId, id])
-    res.json(data.rows[0])
+    try {
+        const userId = await getUserIndex(req);
+        const id = req.body.id;
+        const data = await pool.query("INSERT INTO members(userid, clubid) VALUES($1, $2)", [userId, id])
+        res.json('ok')        
+    } catch (error) {
+        res.json('err')
+    }
+
+
 })
 app.post("/leaveClub",  async(req,res) => {
     const userId = await getUserIndex(req);

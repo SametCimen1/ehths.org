@@ -359,7 +359,7 @@ router.post("/makegroup", async(req,res) => {
 
         if(user){
             if( req.body.newimg !== "" && req.body.groupName !== "" &&  req.body.groupTitle !==""&& req.body.groupDescription !== "" ){ 
-                uploadImg(req.files, req.user._id, true, req.body)            
+                const updateImg = await pool.query('INSERT INTO groups(groupname, members, grouptitle, groupdescription, postsid, groupimage, createdby) VALUES($1, $2, $3, $4, $5, $6, $7)', [req.body.groupName, [user.id], req.body.groupTitle, req.body.groupDescription, [], req.body.newimg, user.id]);   
                 res.redirect(`/connect/communities`);
                 
             }
@@ -949,14 +949,7 @@ router.get("/getCommunities", async(req,res) => {
 })
 
 
-// router.post("/makegroup", async(req,res) => {
-//     const user = req.user;
-//     if(user){
-//         uploadImg(req.files, undefined)
-//     }
 
-//     res.json("ok")
-// })
 
 router.post("/getsinglegroup", async(req,res) => {
     try {
