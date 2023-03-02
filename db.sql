@@ -20,7 +20,8 @@ CREATE TABLE users(
     ownimg boolean,
     image varchar(255),
     friendrequests integer[],
-    points integer 
+    points integer,
+    grade integer
 );
 
 
@@ -42,6 +43,20 @@ CREATE TABLE groups(
     createdby integer REFERENCES users(id)
 );
 
+
+CREATE TABLE groupposts(  
+    id SERIAL PRIMARY KEY,
+    groupid integer REFERENCES groups(id),
+    groupName varchar(255) NOT NULL,
+    userid integer REFERENCES users(id),
+    title varchar(255) NOT NULL,
+    text varchar(1000) NOT NULL,
+    uploadtime timestamp,
+    commentby integer[],
+    likedby integer[],
+    likes integer,
+    comments integer
+);
 
 
 CREATE TABLE posts(
@@ -69,19 +84,6 @@ CREATE TABLE friendposts(
 );
 
 
-CREATE TABLE groupposts(  
-    id SERIAL PRIMARY KEY,
-    groupid integer REFERENCES groups(id),
-    groupName varchar(255) NOT NULL,
-    userid integer REFERENCES users(id),
-    title varchar(255) NOT NULL,
-    text varchar(1000) NOT NULL,
-    uploadtime timestamp,
-    commentby integer[],
-    likedby integer[],
-    likes integer,
-    comments integer
-);
 
 
 CREATE TABLE errors(

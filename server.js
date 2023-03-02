@@ -241,7 +241,10 @@ app.post("/getPeopleSignedUp",  async(req,res) => {
     res.json(newArr)
 })
 app.post("/givepoints",  async(req,res) => {
-    const givePoint = req.body.givePoint
+    console.log("GIVE POINT", req.body.givePoint)
+    const givePoint = Number(req.body.givePoint)
+    console.log("GIVE POINT", typeof(givePoint))
+    console.log("GIVE POINT", givePoint)
     for(let i = 0; i<givePoint.length; i++){
         const getUser =  await pool.query("SELECT * FROM users WHERE id = $1 ", [givePoint[i]])
         let point = getUser.rows[0].points + req.body.eventPoint;
@@ -259,6 +262,74 @@ app.post("/signupEvent",  async(req,res) => {
         const userId = await getUserIndex(req);
         const data = await pool.query("INSERT INTO signups(eventid, userid, clubid, header, description) VALUES ($1, $2, $3, $4, $5)", [req.body.id, userId, req.body.clubid, req.body.header, req.body.description])
         res.json(true)        
+    } catch (error) {
+        console.log("ERROR COCRUERD", error)
+        res.json(false)
+    }
+})
+
+app.post('/getnine', async(req,res) => {
+    try {
+        const data = await pool.query("SELECT id FROM users WHERE grade = 9");
+        const studentIDS = data.rows; studentIDS = [{id:1}, {id:2} ]
+        const randomID = Math.random() * studentIDS.length
+        console.log('students ids', studentIDS)
+
+        const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
+        console.log('winner', winner)
+        res.json(winner.rows[0])        
+
+    } catch (error) {
+        console.log("ERROR COCRUERD", error)
+        res.json(false)
+    }
+})
+
+app.post('/getten', async(req,res) => {
+    try {
+        const data = await pool.query("SELECT id FROM users WHERE grade = 9");
+        const studentIDS = data.rows; studentIDS = [{id:1}, {id:2} ]
+        const randomID = Math.random() * studentIDS.length
+        console.log('students ids', studentIDS)
+
+        const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
+        console.log('winner', winner)
+        res.json(winner.rows[0])        
+
+    } catch (error) {
+        console.log("ERROR COCRUERD", error)
+        res.json(false)
+    }
+})
+
+app.post('/geteleven', async(req,res) => {
+    try {
+        const data = await pool.query("SELECT id FROM users WHERE grade = 9");
+        const studentIDS = data.rows; studentIDS = [{id:1}, {id:2} ]
+        const randomID = Math.random() * studentIDS.length
+        console.log('students ids', studentIDS)
+
+        const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
+        console.log('winner', winner)
+        res.json(winner.rows[0])        
+
+    } catch (error) {
+        console.log("ERROR COCRUERD", error)
+        res.json(false)
+    }
+})
+
+app.post('/gettwelve', async(req,res) => {
+    try {
+        const data = await pool.query("SELECT id FROM users WHERE grade = 9");
+        const studentIDS = data.rows; studentIDS = [{id:1}, {id:2} ]
+        const randomID = Math.random() * studentIDS.length
+        console.log('students ids', studentIDS)
+
+        const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
+        console.log('winner', winner)
+        res.json(winner.rows[0])        
+
     } catch (error) {
         console.log("ERROR COCRUERD", error)
         res.json(false)

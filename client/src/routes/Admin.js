@@ -15,7 +15,7 @@ const Admin = () => {
     const [clubName, setClubName] = useState('');
     const [clubDescription, setClubDescription] = useState('');
     const [IMGurl, setIMGurl] = useState('');
-
+    const [winnerHide, setWinnerHide] = useState(false);
 
 
     const [studentEmail, setStudentEmail] = useState('');
@@ -129,6 +129,7 @@ const Admin = () => {
                 studentImage
             })
         });
+
         const res = await data.json();
         if(res === 'error'){
             alert("error occured, please try again later")
@@ -137,6 +138,57 @@ const Admin = () => {
             alert("successfuly created the user, refreshing the page")
             window.location.reload(true)
         }
+    }
+
+    const get9 = async() => {
+        const data = await fetch("/getnine", {
+            method:"POST",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+        })
+        const winner = await data.json();
+        console.log(winner)
+    }
+
+    const get10 = async() => {
+        const data = await fetch("/getten", {
+            method:"POST",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+        })
+        const winner = await data.json();
+        console.log(winner)
+    }
+
+    const get11 = async() => {
+        const data = await fetch("/geteleven", {
+            method:"POST",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+        })
+        const winner = await data.json();
+        console.log(winner)
+    }
+    const get12 = async() => {
+        const data = await fetch("/gettwelve", {
+            method:"POST",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+        })
+        const winner = await data.json();
+        console.log(winner)
     }
     
     return (
@@ -168,7 +220,6 @@ const Admin = () => {
                                                     <p>{elem.description}</p>
                                                     <div className="flex justify-between items-center">
                                                         <button className="btn btn-primary">Visit</button>
-                                                        <p className='ml-3'>40 Members</p>
                                                     </div>
                                                 </div>
                                                 </div>
@@ -249,6 +300,8 @@ const Admin = () => {
 
                                                     <p className='ml-3 w-1/4'>{friend.name}</p>
 
+                                                    <p className='ml-3 w-1/4'>{friend.grade} grade</p>
+
                                                     <div className='flex ml-3 w-1/4 items-center '>
                                                         <TrophySVG></TrophySVG>
                                                         <p className=''>{friend.points}</p>
@@ -303,30 +356,18 @@ const Admin = () => {
                         <div>
                             <div className='text-center justify-center flex items-center mt-10'>
                                 <p className='font-bold text-xl'>Pick a random winner</p>
-                                <button className='p-1 px-2 rounded-xl bg-gray-200 hover:bg-gray-400 ml-3' onClick = {() => setEventsHide(!eventsHide)}>{eventsHide === false ? 'Hide' : 'Show' }</button>
+                                <button className='p-1 px-2 rounded-xl bg-gray-200 hover:bg-gray-400 ml-3' onClick = {() => setWinnerHide(!winnerHide)}>{winnerHide === false ? 'Hide' : 'Show' }</button>
                             </div>
-                            <div>
-                                {(events !== undefined && eventsHide === false) && events.map((elem) => {
-                                    return(
-                                        <div className='w-1/4 mt-4 mx-2'>
-                                        <Link to = {`/club/${elem.id}`}>
-                                          <div className="card w-96 bg-base-100 shadow-xl">
-                                          <figure><img src = {elem.picture} alt="Club Picture" /></figure>
-                                          <div className="card-body">
-                                              <h2 className="card-title">{elem.name}</h2>
-                                              <p className='text-left'>{elem.description}</p>
-                                              {/* <div className="flex justify-between items-center">
-                                                  <button className="btn btn-primary">Visit</button>
-                                                  <p className='ml-3'>40 Members</p>
-                                              </div> */}
-                                          </div>
-                                          </div>
-                                        </Link>
-                                      </div>
-                                    )
-                                })}
-                                            
+
+                            <div className='flex justify-start w-full'>
+
+                                <button className='btn bg-gray-200 hover:bg-gray-400' onClick={() => get9()}>Pick a random winner from 9th grade</button>
+                                <button className='ml-2 btn bg-gray-200 hover:bg-gray-400' onClick={() => get10()}>Pick a random winner from 10th grade</button>
+                                <button className='ml-2 btn bg-gray-200 hover:bg-gray-400' onClick={() => get11()}>Pick a random winner from 11th grade</button>
+                                <button className='ml-2 btn bg-gray-200 hover:bg-gray-400' onClick={() => get12()}>Pick a random winner from 12th grade</button>
+                            
                             </div>
+                        
                         </div>
 
                         
