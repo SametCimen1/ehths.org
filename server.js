@@ -92,7 +92,7 @@ app.post("/getClubs",  async(req,res) => {
         res.json(data.rows)
     }
     else{
-        const data = await pool.query("SELECT * FROM members WHERE userid != $1", [userid])
+        const data = await pool.query("SELECT * FROM members WHERE userid != $1", [userId])
         console.log("GET CLUBS USER SIGNED IN", data)
         const arr = [];
         for(let i = 0; i<data.rowCount; i++){
