@@ -86,6 +86,7 @@ app.post('/userexist', async(req,res) => {
 
 app.post("/getClubs",  async(req,res) => {
     const userId = await getUserIndex(req);
+    console.log('userid', userId)
     if(userId === false){
         const data = await pool.query("SELECT * FROM clubs")
         res.json(data.rows)
@@ -99,7 +100,7 @@ app.post("/getClubs",  async(req,res) => {
             console.log("my data", myData)
             arr.push(myData.rows)
         }
-        res.json(data.rows)
+        res.json(arr)
     }
 
 })
