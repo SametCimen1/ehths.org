@@ -141,7 +141,7 @@ const Event = () => {
               }
 
           
-            <div className='mx-auto text-center'>
+            <div className='mx-auto text-center w-1/2'>
               <input value = {points} onChange = {(e) => setPoints(e.target.value)} type="text" class="bg-gray-100 appearance-none border rounded w-full py-2 px-3 text-gray-700  focus:shadow-outline" id="points" placeholder="Name" />
             </div>
           
