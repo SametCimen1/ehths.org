@@ -16,6 +16,7 @@ export default function DmTalk() {
     const name = spacedName.replaceAll("_", " ")
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("")
+    const [PORT, setPORT] = useState("localhost:5000")
 
 
 
@@ -34,10 +35,25 @@ export default function DmTalk() {
       } 
 
 
+      const getPort = async() => {
+
+        const data = await fetch("/getPORT", {
+            method:"POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+          });
+          const response = await data.json();
+          setPORT(response);
+      }
 
     useEffect(()=>{
-        socket = io("localhost:5000");
         getMyName();
+        getPort()
+        socket = io(PORT);
+        
     },[])
 
     useEffect(()=>{
@@ -137,9 +153,9 @@ export default function DmTalk() {
                </div>
             </div>
             
-            
+
             <div>
-                <input type = "text" placeholder='type here' onChange = {(e) => setMessage(e.target.value)} onKeyPress = {(e)=> e.key === 'Enter' ? sendMessage(e) : null}></input>
+                <input className = "border-2 border-gray-200 p-2" type = "text" placeholder='type here' onChange = {(e) => setMessage(e.target.value)} onKeyPress = {(e)=> e.key === 'Enter' ? sendMessage(e) : null}></input>
                 <button className='btn bg-blue-500 hover:bg-blue-700' onClick = {(e) => sendMessage(e)}>Send</button>
             </div>
 

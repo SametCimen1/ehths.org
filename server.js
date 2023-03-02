@@ -336,6 +336,14 @@ app.post("/getEvent",  async(req,res) => {
     }
 })
 
+app.post("/getPORT",  async(req,res) => {
+    try {
+        res.json(`localhost:${process.env.PORT}`)
+    } catch (error) {
+        res.json('localhost:5000')
+    }
+})
+
 const getUserIndex = async(req, res) => {
     const cookies = req.cookies;
     if(cookies._keh){

@@ -45,7 +45,7 @@ const ClubBig = () => {
         })
         const res2 = await data2.json();
         console.log("AM I ADMIN", res2)
-        setIsAdmin(true)
+        setIsAdmin(res2)
     }
 
     const getIsIn = async() => {
