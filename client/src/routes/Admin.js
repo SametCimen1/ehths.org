@@ -211,8 +211,8 @@ const Admin = () => {
                             </div>
 
                             {createIsStudent &&
-                                <div>
-                                        <div className='w-1/3 mt-3 py-2 bg-gray-100 p-2'>
+                                <div className='mx-auto'>
+                                        <div className=' mx-auto w-1/3 mt-3 py-2 bg-gray-100 p-2'>
                                             <div className=''>
                                                 <input className='border-2 p-2 w-full' type = "text" placeholder='User or Student Name' onChange = {(e) => setStudentName(e.target.value)}></input>
                                             </div>
@@ -244,7 +244,7 @@ const Admin = () => {
                                                         src={`/img/${friend.image}`}
                                                     ></img>
                                                     ) : (
-                                                    <img src="slide1.png"  className='w-1/4 rounded-xl'></img>
+                                                        <img src= {friend.image}  className='userPicture rounded-xl'></img>
                                                     )}
 
                                                     <p className='ml-3 w-1/4'>{friend.name}</p>

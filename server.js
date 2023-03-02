@@ -97,6 +97,7 @@ app.post("/getClubs",  async(req,res) => {
         console.log("GET CLUBS USER SIGNED IN", data)
         if(data.rowCount === 0){
             const data = await pool.query("SELECT * FROM clubs");
+            res.json(data.rows)
         }else{
             const arr = [];
             for(let i = 0; i<data.rowCount; i++){
@@ -171,7 +172,7 @@ app.post('/createStudent', async(req,res) => {
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(req.body.studentPassword, salt);
 
-        const data = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12)",[req.body.studentEmail, hashPassword, req.body.studentRole, true, '', req.body.studentName, [], req.body.studentEmail, '', false, req.body.studentImage, []]);
+        const data = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests, points) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12, $13)",[req.body.studentEmail, hashPassword, req.body.studentRole, true, '', req.body.studentName, [], req.body.studentEmail, '', false, req.body.studentImage, [], 0]);
         res.json('ok')
     } catch (error) {
         console.log('creating student error', error)
