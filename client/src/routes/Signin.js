@@ -22,8 +22,8 @@ export default function Signin() {
             redirect: 'follow',
             credentials: 'include',
             body:JSON.stringify({
-            email,
-            password,
+                email,
+                password,
             })
         });
         

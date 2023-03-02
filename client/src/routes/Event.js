@@ -8,6 +8,8 @@ const Event = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [people, setPeople] = useState([])
   const navigate = useNavigate();
+  const [points, setPoints] = useState(0)
+
 
   const getEvent = async() => {
   
@@ -63,7 +65,7 @@ const Event = () => {
       credentials: 'include',
       body: JSON.stringify({
         givePoint,
-        eventPoint:5
+        eventPoint:points
       })
     })
 
@@ -137,6 +139,11 @@ const Event = () => {
                   <p>No one signed up yet</p>
               </div>
               }
+
+          
+            <div className='mx-auto text-center'>
+              <input value = {points} onChange = {(e) => setPoints(e.target.value)} type="text" class="bg-gray-100 appearance-none border rounded w-full py-2 px-3 text-gray-700  focus:shadow-outline" id="points" placeholder="Name" />
+            </div>
           
             <div className='mx-auto text-center'>
               <button className='mr-4 btn  bg-red-500 hover:bg-red-700'>Delete Event</button>

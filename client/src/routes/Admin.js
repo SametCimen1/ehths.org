@@ -208,28 +208,23 @@ const Admin = () => {
                                 <button className='p-1 px-2 rounded-xl bg-gray-200 hover:bg-gray-400 ml-3' onClick = {() => setEventsHide(!eventsHide)}>{eventsHide === false ? 'Hide' : 'Show' }</button>
                             </div>
                             <div>
-                                {(events !== undefined && eventsHide === false) && events.map((element) => {
+                                {(events !== undefined && eventsHide === false) && events.map((elem) => {
                                     return(
-                                                    <div className='w-1/4 mt-4 mx-2'>
-                                                       
-                                                                <div className="card  bg-base-100 shadow-xl">
-                      
-                                                                        <div className="card-body">
-                                                                            <Link to = {`/event/${element.id}?club=${element.clubid}`}>
-                                                                                <h2 className="card-title">{element.header}</h2>
-                                                                                <p className='mt-2'>{element.description}</p>
-                                                                                <p className='text-sm mt-3'>{element.date.substring(0,10)}</p>
-                                                                                <div className="flex justify-between items-center">
-                                                                                
-                                                                                </div>
-                                                                            </Link>
-                                                                        </div>
-                    
-                                                                   
-                                                                </div>
-                                                        
-                                                        
-                                                    </div>
+                                        <div className='w-1/4 mt-4 mx-2'>
+                                        <Link to = {`/club/${elem.id}`}>
+                                          <div className="card w-96 bg-base-100 shadow-xl">
+                                          <figure><img src = {elem.picture} alt="Club Picture" /></figure>
+                                          <div className="card-body">
+                                              <h2 className="card-title">{elem.name}</h2>
+                                              <p className='text-left'>{elem.description}</p>
+                                              {/* <div className="flex justify-between items-center">
+                                                  <button className="btn btn-primary">Visit</button>
+                                                  <p className='ml-3'>40 Members</p>
+                                              </div> */}
+                                          </div>
+                                          </div>
+                                        </Link>
+                                      </div>
                                     )
                                 })}
                                             

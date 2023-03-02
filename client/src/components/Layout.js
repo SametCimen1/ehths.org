@@ -71,6 +71,17 @@ const Layout = ({children}) => {
   }
 
 
+    const logOut = async() => {
+      const data = await fetch("/logout", {
+          method:"POST",
+          headers: {  
+            'Content-Type': 'application/json'
+          },
+          redirect: 'follow',
+      })
+      window.location.reload(true)
+
+    }
 
     return (
     <div data-theme = {theme} className="main">
@@ -157,12 +168,15 @@ const Layout = ({children}) => {
                   
 
  
+                  
+
                   {loggedIn &&
                     <div className="dropdown  dropdown-end">
                       <img tabIndex="0" className = "w-14 h-14  rounded-xl cursor-pointer  object-cover ml-2" src = {`${user.image.includes("http") ? user.image : "/img/" + user.image} `}  /> 
                       <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                         <li className='mt-1 focus:bg-slate-300'><a className = "focus:bg-slate-300'"  href = "/dashboard">Panel</a></li>
                         <li className='mt-1'><a href = {`/profile`}>Profile</a></li>
+                        <li className='mt-1' onClick = {() => logOut()}>Log Out</li>
                       </ul>
                     </div>
                   }  

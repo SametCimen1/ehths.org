@@ -262,10 +262,10 @@ export default function HomeUser() {
                             <div className="card-body">
                                 <h2 className="card-title">{elem.name}</h2>
                                 <p className='text-left'>{elem.description}</p>
-                                <div className="flex justify-between items-center">
+                                {/* <div className="flex justify-between items-center">
                                     <button className="btn btn-primary">Visit</button>
                                     <p className='ml-3'>40 Members</p>
-                                </div>
+                                </div> */}
                             </div>
                             </div>
                           </Link>
