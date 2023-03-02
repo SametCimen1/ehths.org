@@ -105,26 +105,6 @@ export default function DmTalk() {
     })
 
 
-    // useEffect(()=>{
-    //     if(typeof socket !== 'undefined'){
-    //         socket.on('message', (message) => {
-    //             setMessages([...messages, message])
-    //             if(messages.length > 7){
-    //                 console.log("DELETING")
-    //                 setMessages([{user:"admin", text:"Deleted the chat"}, message])
-    //                 // for(let i = messages.length; i>messages.length -2; i--){
-    //                 //     setMessages([...messages], messages[i]);
-    //                 // }
-    //                 // setMessages([...messages, message])
-    //             }
-    //             })            
-    //     }
-    //     else{
-    //         console.log("socket is undefined")
-    //     }
- 
-
-    // },[messages])
 
 
     const sendMessage = (e) => {
@@ -146,11 +126,7 @@ export default function DmTalk() {
 }
 
     return (
-        <div>
-            <div>
-                <h1 >Warning</h1>
-                <p>due to a rendering problem, when you send about more than 10 message the page may start to slow down. If it happens please reload the website. Working to fix it rn!</p>
-            </div>
+        <div className='container mx-auto'>
 
             <div>
                {/* <Messages messages = {messages}></Messages> */}
@@ -161,9 +137,10 @@ export default function DmTalk() {
                </div>
             </div>
             
+            
             <div>
                 <input type = "text" placeholder='type here' onChange = {(e) => setMessage(e.target.value)} onKeyPress = {(e)=> e.key === 'Enter' ? sendMessage(e) : null}></input>
-                <button onClick = {(e) => sendMessage(e)}>Send</button>
+                <button className='btn bg-blue-500 hover:bg-blue-700' onClick = {(e) => sendMessage(e)}>Send</button>
             </div>
 
         </div>

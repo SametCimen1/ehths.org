@@ -156,20 +156,32 @@ app.post("/deleteClub",  async(req,res) => {
 
 app.post("/getamiadmin", async(req,res) => {
     const userId = await getUserIndex(req);
-    const data = await pool.query("SELECT role FROM users WHERE id = $1", [userId])
-    try {
-        res.json(data.rows[0].role === 'admin')        
-    } catch (error) {
-        res.json(false)
+    if(userId === false){
+        res.json(false);
+    }
+    else{
+        const data = await pool.query("SELECT role FROM users WHERE id = $1", [userId])
+        try {
+            res.json(data.rows[0].role === 'admin')        
+        } catch (error) {
+            res.json(false)
+        }
+    
     }
 
 })
 
 app.post("/amiin",  async(req,res) => {
     const userId = await getUserIndex(req);
-    const id = req.body.id;
-    const data = await pool.query("SELECT * FROM members WHERE userid = $1 AND clubid = $2", [userId, id])
-    res.json(data.rowCount > 0)
+    if(userId === false){
+        res.json(false);
+    }
+    else{
+        const id = req.body.id;
+        const data = await pool.query("SELECT * FROM members WHERE userid = $1 AND clubid = $2", [userId, id])
+        res.json(data.rowCount > 0)
+    }
+
 })
 
 app.post("/getmyclubs",  async(req,res) => {
