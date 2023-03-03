@@ -359,7 +359,7 @@ router.post("/makegroup", async(req,res) => {
         console.log(user.id)
         if(user){
             if( req.body.newimg !== "" && req.body.groupName !== "" &&  req.body.groupTitle !==""&& req.body.groupDescription !== "" ){ 
-                const updateImg = await pool.query('INSERT INTO groups(groupname, members, grouptitle, groupdescription, postsid, groupimage, createdby) VALUES($1, $2, $3, $4, $5, $6, $7)', [req.body.groupName, 1, req.body.groupTitle, req.body.groupDescription, [], req.body.newimg, user.id]);   
+                const updateImg = await pool.query('INSERT INTO groups(groupname, members, grouptitle, groupdescription, postsid, groupimage, createdby) VALUES($1, $2, $3, $4, $5, $6, $7)', [req.body.groupName, [1], req.body.groupTitle, req.body.groupDescription, [], req.body.newimg, user.id]);   
                 res.redirect(`/connect/communities`);
                 
             }
