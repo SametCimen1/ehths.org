@@ -23,6 +23,7 @@ const Admin = () => {
     const [studentPassword, setStudentPassword] = useState('');
     const [studentRole, setStudentRole] = useState('');
     const [studentImage, setStudentImage] = useState('');
+    const [studentGrade, setStudentGrade] = useState(0);
 
     const getUser = async() => {
         const data = await fetch("/user/getUser", {
@@ -126,7 +127,8 @@ const Admin = () => {
                 studentEmail,
                 studentPassword,
                 studentRole,
-                studentImage
+                studentImage,
+                studentGrade
             })
         });
 
@@ -278,6 +280,9 @@ const Admin = () => {
                                             </div>
                                             <div className='mt-2'>
                                                 <input className='border-2 p-2 w-full' type = "text" placeholder='Image URL'  onChange = {(e) => setStudentImage(e.target.value)}></input>
+                                            </div>
+                                            <div className='mt-2'>
+                                                <input className='border-2 p-2 w-full' type = "text" placeholder='Grade'  onChange = {(e) => setStudentGrade(e.target.value)}></input>
                                             </div>
                                             
                                             <button className='mt-2  border-2 border-blue-500 p-2 rounded w-full' onClick = {() => createStudent()}>Create an Event</button>

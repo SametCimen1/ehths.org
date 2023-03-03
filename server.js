@@ -172,7 +172,7 @@ app.post('/createStudent', async(req,res) => {
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(req.body.studentPassword, salt);
 
-        const data = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests, points) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12, $13)",[req.body.studentEmail, hashPassword, req.body.studentRole, true, '', req.body.studentName, [], req.body.studentEmail, '', false, req.body.studentImage, [], 0]);
+        const data = await pool.query("INSERT INTO users(email, password, role, active, activeCode, name, friends, add_id, about, ownimg, image, friendrequests, points, grade) VALUES($1, $2, $3,$4,$5, $6, $7, $8, $9, $10, $11, $12, $13, $14)",[req.body.studentEmail, hashPassword, req.body.studentRole, true, '', req.body.studentName, [], req.body.studentEmail, '', false, req.body.studentImage, [], 0, Number(req.body.studentGrade)]);
         res.json('ok')
     } catch (error) {
         console.log('creating student error', error)
@@ -271,7 +271,7 @@ app.post("/signupEvent",  async(req,res) => {
 app.post('/getnine', async(req,res) => {
     try {
         const data = await pool.query("SELECT id FROM users WHERE grade = 9");
-        const studentIDS = data.rows; studentIDS = [{id:1}, {id:2} ]
+        const studentIDS = data.rows; 
         const randomID = Math.random() * studentIDS.length
         console.log('students ids', studentIDS)
 
@@ -288,7 +288,7 @@ app.post('/getnine', async(req,res) => {
 app.post('/getten', async(req,res) => {
     try {
         const data = await pool.query("SELECT id FROM users WHERE grade = 9");
-        const studentIDS = data.rows; studentIDS = [{id:1}, {id:2} ]
+        const studentIDS = data.rows; 
         const randomID = Math.random() * studentIDS.length
         console.log('students ids', studentIDS)
 
@@ -305,7 +305,7 @@ app.post('/getten', async(req,res) => {
 app.post('/geteleven', async(req,res) => {
     try {
         const data = await pool.query("SELECT id FROM users WHERE grade = 9");
-        const studentIDS = data.rows; studentIDS = [{id:1}, {id:2} ]
+        const studentIDS = data.rows; 
         const randomID = Math.random() * studentIDS.length
         console.log('students ids', studentIDS)
 
@@ -322,7 +322,7 @@ app.post('/geteleven', async(req,res) => {
 app.post('/gettwelve', async(req,res) => {
     try {
         const data = await pool.query("SELECT id FROM users WHERE grade = 9");
-        const studentIDS = data.rows; studentIDS = [{id:1}, {id:2} ]
+        const studentIDS = data.rows; 
         const randomID = Math.random() * studentIDS.length
         console.log('students ids', studentIDS)
 
