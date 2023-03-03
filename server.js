@@ -294,7 +294,7 @@ app.post('/getnine', async(req,res) => {
 
 app.post('/getten', async(req,res) => {
     try {
-        const data = await pool.query("SELECT id FROM users WHERE grade = 9");
+        const data = await pool.query("SELECT id FROM users WHERE grade = 10");
         const studentIDS = data.rows; 
         const randomID = Math.floor(Math.random()*studentIDS.length)
         const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
@@ -317,7 +317,7 @@ app.post('/getten', async(req,res) => {
 
 app.post('/geteleven', async(req,res) => {
     try {
-        const data = await pool.query("SELECT id FROM users WHERE grade = 9");
+        const data = await pool.query("SELECT id FROM users WHERE grade = 11");
         const studentIDS = data.rows; 
         const randomID = Math.floor(Math.random()*studentIDS.length)
         const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
@@ -340,7 +340,7 @@ app.post('/geteleven', async(req,res) => {
 
 app.post('/gettwelve', async(req,res) => {
     try {
-        const data = await pool.query("SELECT id FROM users WHERE grade = 9");
+        const data = await pool.query("SELECT id FROM users WHERE grade = 12");
         const studentIDS = data.rows; 
         const randomID = Math.floor(Math.random()*studentIDS.length)
         const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
