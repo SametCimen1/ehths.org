@@ -48,7 +48,10 @@ code {
   flex-wrap: wrap;
   align-items: stretch;
 }
-[data-theme="black"] h2, h1 {
+[data-theme="black"] h2{
+  color: rgb(230, 230, 230)
+}
+[data-theme="black"] h1{
   color: rgb(230, 230, 230)
 }
 [data-theme="black"] p{
