@@ -126,7 +126,7 @@ const Event = () => {
                         
                       <div className = "flex items-center">
                           <label>Attanded</label>
-                          <input type = "checkbox" className='mr-4 ml-1' placeholder='' onChange= {() => {givePoint.push(user.userid); console.log('ummser',user)}}></input>
+                          <input type = "checkbox" className='mr-4 ml-1' placeholder='' onChange= {() => {givePoint.push(user.id); console.log('ummser',user)}}></input>
                           <button className = "mx-4 btn bg-red-500 hover:bg-red-700">Remove</button>
                       </div>
 
