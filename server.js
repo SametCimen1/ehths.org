@@ -242,13 +242,12 @@ app.post("/getPeopleSignedUp",  async(req,res) => {
 })
 app.post("/givepoints",  async(req,res) => {
     console.log("GIVE POINT", req.body.givePoint)
-    const givePoint = Number(req.body.givePoint)
     console.log("GIVE POINT", typeof(givePoint))
     console.log("GIVE POINT", givePoint)
     for(let i = 0; i<givePoint.length; i++){
         const getUser =  await pool.query("SELECT * FROM users WHERE id = $1 ", [givePoint[i]])
         let point = getUser.rows[0].points + req.body.eventPoint;
-        const data = await pool.query("UPDATE users SET points = $1 WHERE id = $2 ", [point, givePoint[i]])
+        const data = await pool.query("UPDATE users SET points = $1 WHERE id = $2 ", [Number(point), givePoint[i]])
     }
 
     res.json('ok')

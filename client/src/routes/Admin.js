@@ -366,10 +366,10 @@ const Admin = () => {
                             <div className='flex justify-center w-full wrap'>
 
                                 <label htmlFor="my-modal" className='btn border-2 border-blue-400  hover:bg-blue-500 w-1/5' onClick={() => get9()}>Award the student with the top points</label>
-                                <label htmlFor="my-modal" className='btn bg-blue-400  hover:bg-blue-500 w-1/5' onClick={() => get9()}>Pick a random winner from 9th grade</label>
+                                <label htmlFor="my-modal" className='btn bg-blue-400 text-black ml-2  hover:bg-blue-500 w-1/5' onClick={() => get9()}>Pick a random winner from 9th grade</label>
                                 <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get10()}>Pick a random winner from 10th grade</label>
                                 <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get11()}>Pick a random winner from 11th grade</label>
-                                <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get12()}>Pick a random winner from 12th grade</label>
+                                <label htmlFor="my-modal" className='ml-2 btn mt-2 bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get12()}>Pick a random winner from 12th grade</label>
                             
                             </div>
                         
