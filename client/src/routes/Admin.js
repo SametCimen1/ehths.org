@@ -16,7 +16,7 @@ const Admin = () => {
     const [clubDescription, setClubDescription] = useState('');
     const [IMGurl, setIMGurl] = useState('');
     const [winnerHide, setWinnerHide] = useState(false);
-
+    const [winner, setWinner] = useState({});
 
     const [studentEmail, setStudentEmail] = useState('');
     const [studentName, setStudentName] = useState('');
@@ -152,7 +152,7 @@ const Admin = () => {
             credentials: 'include',
         })
         const winner = await data.json();
-        console.log(winner)
+        setWinner(winner)
     }
 
     const get10 = async() => {
@@ -165,7 +165,7 @@ const Admin = () => {
             credentials: 'include',
         })
         const winner = await data.json();
-        console.log(winner)
+        setWinner(winner)
     }
 
     const get11 = async() => {
@@ -178,7 +178,7 @@ const Admin = () => {
             credentials: 'include',
         })
         const winner = await data.json();
-        console.log(winner)
+        setWinner(winner)
     }
     const get12 = async() => {
         const data = await fetch("/gettwelve", {
@@ -190,7 +190,7 @@ const Admin = () => {
             credentials: 'include',
         })
         const winner = await data.json();
-        console.log(winner)
+        setWinner(winner)
     }
     
     return (
@@ -366,10 +366,10 @@ const Admin = () => {
 
                             <div className='flex justify-start w-full'>
 
-                                <button className='btn bg-gray-200 hover:bg-gray-400' onClick={() => get9()}>Pick a random winner from 9th grade</button>
-                                <button className='ml-2 btn bg-gray-200 hover:bg-gray-400' onClick={() => get10()}>Pick a random winner from 10th grade</button>
-                                <button className='ml-2 btn bg-gray-200 hover:bg-gray-400' onClick={() => get11()}>Pick a random winner from 11th grade</button>
-                                <button className='ml-2 btn bg-gray-200 hover:bg-gray-400' onClick={() => get12()}>Pick a random winner from 12th grade</button>
+                                <label htmlFor="my-modal" className='btn bg-gray-200 hover:bg-gray-400' onClick={() => get9()}>Pick a random winner from 9th grade</label>
+                                <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500' onClick={() => get10()}>Pick a random winner from 10th grade</label>
+                                <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500' onClick={() => get11()}>Pick a random winner from 11th grade</label>
+                                <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500' onClick={() => get12()}>Pick a random winner from 12th grade</label>
                             
                             </div>
                         
@@ -388,6 +388,18 @@ const Admin = () => {
                 </div>
             }
 
+
+
+            <input type="checkbox" id="my-modal" className="modal-toggle" />
+            <div className="modal">
+            <div className="modal-box">
+                <h3 className="font-bold text-lg">Winner is: {winner.email}</h3>
+                <p className="py-4">{winner.name} has been rewarded with a {winner.reward}</p>
+                <div className="modal-action">
+                <label htmlFor="my-modal" className="btn">Close</label>
+                </div>
+            </div>
+            </div>
 
         </div>
     )

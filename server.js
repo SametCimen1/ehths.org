@@ -273,12 +273,17 @@ app.post('/getnine', async(req,res) => {
         const data = await pool.query("SELECT id FROM users WHERE grade = 9");
         const studentIDS = data.rows; 
         const randomID = Math.floor(Math.random()*studentIDS.length)
-        console.log('students ids', studentIDS.length)
-        console.log('randomID', randomID)
-        console.log("dsadsa", studentIDS[randomID].id)
-
         const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
-        console.log('winner', winner)
+        if(winner.rows[0].points < 20){
+            winner.rows[0].reward = "Pencil + Eraser"
+        }else if(winner.rows[0].points < 50){
+            winner.rows[0].reward = "School Pants ($20)"
+        }else if(winner.rows[0].points< 100){
+            winner.rows[0].reward = "Wawa Gift Card ($50)"
+        }else{
+            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate"
+        }
+
         res.json(winner.rows[0])        
 
     } catch (error) {
@@ -291,11 +296,17 @@ app.post('/getten', async(req,res) => {
     try {
         const data = await pool.query("SELECT id FROM users WHERE grade = 9");
         const studentIDS = data.rows; 
-        const randomID = Math.random() * studentIDS.length
-        console.log('students ids', studentIDS)
-
+        const randomID = Math.floor(Math.random()*studentIDS.length)
         const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
-        console.log('winner', winner)
+        if(winner.rows[0].points < 20){
+            winner.rows[0].reward = "Pencil + Eraser"
+        }else if(winner.rows[0].points < 50){
+            winner.rows[0].reward = "School Pants ($20)"
+        }else if(winner.rows[0].points< 100){
+            winner.rows[0].reward = "Wawa Gift Card ($50)"
+        }else{
+            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate"
+        }
         res.json(winner.rows[0])        
 
     } catch (error) {
@@ -308,11 +319,17 @@ app.post('/geteleven', async(req,res) => {
     try {
         const data = await pool.query("SELECT id FROM users WHERE grade = 9");
         const studentIDS = data.rows; 
-        const randomID = Math.random() * studentIDS.length
-        console.log('students ids', studentIDS)
-
+        const randomID = Math.floor(Math.random()*studentIDS.length)
         const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
-        console.log('winner', winner)
+        if(winner.rows[0].points < 20){
+            winner.rows[0].reward = "Pencil + Eraser"
+        }else if(winner.rows[0].points < 50){
+            winner.rows[0].reward = "School Pants ($20)"
+        }else if(winner.rows[0].points< 100){
+            winner.rows[0].reward = "Wawa Gift Card ($50)"
+        }else{
+            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate"
+        }
         res.json(winner.rows[0])        
 
     } catch (error) {
@@ -325,11 +342,17 @@ app.post('/gettwelve', async(req,res) => {
     try {
         const data = await pool.query("SELECT id FROM users WHERE grade = 9");
         const studentIDS = data.rows; 
-        const randomID = Math.random() * studentIDS.length
-        console.log('students ids', studentIDS)
-
+        const randomID = Math.floor(Math.random()*studentIDS.length)
         const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
-        console.log('winner', winner)
+        if(winner.rows[0].points < 20){
+            winner.rows[0].reward = "Pencil + Eraser"
+        }else if(winner.rows[0].points < 50){
+            winner.rows[0].reward = "School Pants ($20)"
+        }else if(winner.rows[0].points< 100){
+            winner.rows[0].reward = "Wawa Gift Card ($50)"
+        }else{
+            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate"
+        }
         res.json(winner.rows[0])        
 
     } catch (error) {
@@ -337,7 +360,6 @@ app.post('/gettwelve', async(req,res) => {
         res.json(false)
     }
 })
-
 app.post("/makepastevent",  async(req,res) => {
     try {
         const eventid = req.body.id
