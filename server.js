@@ -253,6 +253,22 @@ app.post("/givepoints",  async(req,res) => {
     res.json('ok')
 })
 
+app.post("/resetPoints", async(req,res) => {
+
+    try {
+        const ids = await pool.query("SELECT id FROM users")        
+        for(let i = 0; i<ids.length; i++){
+            const updateUser =  await pool.query("UPDAETE users SET points = 0 WHERE id = $1 ", [ids[i].id])
+        }
+    
+        res.json('ok')
+
+    } catch (error) {
+        console.log("ERRO WHILE RESETTING POINTS", error)
+        res.json('error')
+    }
+
+})
 
 
 

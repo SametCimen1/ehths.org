@@ -193,6 +193,25 @@ const Admin = () => {
         setWinner(winner)
     }
     
+
+
+    const resetPoints = async() => {
+        const data = await fetch("/resetPoints", {
+            method:"POST",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+        })
+        const res = await data.json();
+        if(res === 'ok'){
+            alert("Succesfully ressetted hours")
+        }
+        else{
+            alert("Error occured please try again later")
+        }
+    }
     return (
         <div>
             
@@ -261,6 +280,7 @@ const Admin = () => {
                                 <p className='font-bold text-xl'>Students & users (sorted by highest points)</p>
                                 <button className='p-1 px-2 rounded-xl bg-gray-200 hover:bg-gray-400 ml-3' onClick = {() => setStudentHide(!studentHide)}>{studentHide === false ? 'Hide' : 'Show' }</button>
                                 <button className='p-1 px-2 rounded-xl bg-gray-200 hover:bg-gray-400 ml-3' onClick = {() => setIsCreateStudent(!createIsStudent)}>{createIsStudent === false ? 'Create' : 'Cancel' }</button>
+                                <button className='p-1 px-2 rounded-xl bg-red-200 hover:bg-red-400 ml-3' onClick = {() => resetPoints()}>{createIsStudent === false ? 'Reset the Points' : 'Cancel' }</button>
                             </div>
 
                             {createIsStudent &&
@@ -285,7 +305,7 @@ const Admin = () => {
                                                 <input className='border-2 p-2 w-full' type = "text" placeholder='Grade'  onChange = {(e) => setStudentGrade(e.target.value)}></input>
                                             </div>
                                             
-                                            <button className='mt-2  border-2 border-blue-500 p-2 rounded w-full' onClick = {() => createStudent()}>Create an Event</button>
+                                            <button className='mt-2  border-2 border-blue-500 p-2 rounded w-full' onClick = {() => createStudent()}>Create the User</button>
                                         </div>
                                 </div>
                             }
@@ -365,8 +385,8 @@ const Admin = () => {
 
                             <div className='flex justify-center w-full wrap'>
 
-                                <label htmlFor="my-modal" className='btn border-2 border-blue-400  hover:bg-blue-500 w-1/5' onClick={() => get9()}>Award the student with the top points</label>
-                                <label htmlFor="my-modal" className='btn bg-blue-400 text-black ml-2  hover:bg-blue-500 w-1/5' onClick={() => get9()}>Pick a random winner from 9th grade</label>
+                                <label htmlFor="my-modal" className='btn border-2 text-black  border-blue-400  hover:bg-blue-500 w-1/5' onClick={() => get9()}>Award the student with the top points</label>
+                                <label htmlFor="my-modal" className='btn bg-blue-400 ml-2   hover:bg-blue-500 w-1/5' onClick={() => get9()}>Pick a random winner from 9th grade</label>
                                 <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get10()}>Pick a random winner from 10th grade</label>
                                 <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get11()}>Pick a random winner from 11th grade</label>
                                 <label htmlFor="my-modal" className='ml-2 btn mt-2 bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get12()}>Pick a random winner from 12th grade</label>
