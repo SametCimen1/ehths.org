@@ -56,6 +56,8 @@ const Event = () => {
   const givePoint = [];
 
   const givePoints = async() => {
+    console.log('give point', givePoint)
+    console.log(' eventPoint', points)
     const data = await fetch("/givepoints", {
       method:"POST",
       headers: {
