@@ -364,12 +364,13 @@ const Admin = () => {
                                 <button className='p-1 px-2 rounded-xl bg-gray-200 hover:bg-gray-400 ml-3' onClick = {() => setWinnerHide(!winnerHide)}>{winnerHide === false ? 'Hide' : 'Show' }</button>
                             </div>
 
-                            <div className='flex justify-start w-full'>
+                            <div className='flex justify-start w-full wrap'>
 
-                                <label htmlFor="my-modal" className='btn bg-gray-200 hover:bg-gray-400' onClick={() => get9()}>Pick a random winner from 9th grade</label>
-                                <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500' onClick={() => get10()}>Pick a random winner from 10th grade</label>
-                                <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500' onClick={() => get11()}>Pick a random winner from 11th grade</label>
-                                <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500' onClick={() => get12()}>Pick a random winner from 12th grade</label>
+                                <label htmlFor="my-modal" className='btn bg-blue-400  hover:bg-blue-500 w-1/5' onClick={() => get9()}>Award the student with the top points</label>
+                                <label htmlFor="my-modal" className='btn bg-blue-400  hover:bg-blue-500 w-1/5' onClick={() => get9()}>Pick a random winner from 9th grade</label>
+                                <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get10()}>Pick a random winner from 10th grade</label>
+                                <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get11()}>Pick a random winner from 11th grade</label>
+                                <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get12()}>Pick a random winner from 12th grade</label>
                             
                             </div>
                         
@@ -396,7 +397,7 @@ const Admin = () => {
                 <h3 className="font-bold text-lg">Winner is: {winner.email}</h3>
                 <p className="py-4">{winner.name} has been rewarded with a {winner.reward}</p>
                 <div className="modal-action">
-                <label htmlFor="my-modal" className="btn">Close</label>
+                    <label htmlFor="my-modal" className="btn bg-red-500">Close</label>
                 </div>
             </div>
             </div>
