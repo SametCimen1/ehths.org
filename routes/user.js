@@ -1033,8 +1033,29 @@ router.post('/getgroupposts', async(req,res) => {
     }
 })
 
+const getUserIndex = async(req, res) => {
+    const cookies = req.cookies;
+    if(cookies._keh){
+        const {_keh} = req.cookies;
+        const verified = jwt.verify(_keh, process.env.TOKENSECRET);
+        if(verified._id){
+            try{
+                const data = await pool.query('SELECT * FROM users WHERE id = $1', [verified._id]);
+                const user = await data.rows[0];
+                if(user){
+                //   console.log('everything went ok user exist')
+                 return user.id
+                }  
+            }
+            catch (err){
+             return false;
+            }
+        }
+    }return false;
+}
 
 
 module.exports = router;
+
 
 
