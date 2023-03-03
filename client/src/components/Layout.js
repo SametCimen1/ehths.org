@@ -176,7 +176,6 @@ const Layout = ({children}) => {
                       <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                         <li className='mt-1 focus:bg-slate-300'><a className = "focus:bg-slate-300'"  href = "/dashboard">Panel</a></li>
                         <li className='mt-1'><a href = {`/profile`}>Profile</a></li>
-                        <li className='mt-1' onClick = {() => logOut()}>Log Out</li>
                       </ul>
                     </div>
                   }  

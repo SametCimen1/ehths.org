@@ -43,7 +43,6 @@ const Clubs = () => {
                                     <p>{elem.description}</p>
                                     <div className="flex justify-between items-center">
                                         <button className="btn btn-primary">Visit</button>
-                                        <p className='ml-3'>40 Members</p>
                                     </div>
                                 </div>
                                 </div>

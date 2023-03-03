@@ -241,13 +241,14 @@ app.post("/getPeopleSignedUp",  async(req,res) => {
     res.json(newArr)
 })
 app.post("/givepoints",  async(req,res) => {
+    const givePoint = req.body.givePoint
     console.log("GIVE POINT", req.body.givePoint)
     console.log("GIVE POINT", typeof(givePoint))
     console.log("GIVE POINT", givePoint)
     for(let i = 0; i<givePoint.length; i++){
         const getUser =  await pool.query("SELECT * FROM users WHERE id = $1 ", [givePoint[i]])
-        let point = getUser.rows[0].points + req.body.eventPoint;
-        const data = await pool.query("UPDATE users SET points = $1 WHERE id = $2 ", [Number(point), givePoint[i]])
+        let point = Number(getUser.rows[0].points) + Number(req.body.eventPoint);
+        const data = await pool.query("UPDATE users SET points = $1 WHERE id = $2 ", [point, givePoint[i]])
     }
 
     res.json('ok')
@@ -258,7 +259,7 @@ app.post("/resetPoints", async(req,res) => {
     try {
         const ids = await pool.query("SELECT id FROM users")        
         for(let i = 0; i<ids.length; i++){
-            const updateUser =  await pool.query("UPDAETE users SET points = 0 WHERE id = $1 ", [ids[i].id])
+            const updateUser =  await pool.query("UPDATE users SET points = 0 WHERE id = $1 ", [ids[i].id])
         }
     
         res.json('ok')
