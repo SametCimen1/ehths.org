@@ -615,7 +615,8 @@ router.post("/getimg", async(req,res) => {
 })
 
 router.get("/getMyGroups", async(req,res) => {
-    const group = await pool.query("SELECT * FROM groups WHERE $1 = ANY (members) ORDER BY id DESC LIMIT 5", [req.user._id]);
+    const userid = getUserIndex(req)
+    const group = await pool.query("SELECT * FROM groups WHERE $1 = ANY (members) ORDER BY id DESC LIMIT 5", [userid]);
     const arr = [];
 
     for(let i =0; i< group.rowCount; i++){
