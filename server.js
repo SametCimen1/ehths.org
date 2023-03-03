@@ -274,6 +274,8 @@ app.post('/getnine', async(req,res) => {
         const studentIDS = data.rows; 
         const randomID = Math.random() * studentIDS.length
         console.log('students ids', studentIDS)
+        console.log('randomID', randomID)
+        console.log("dsadsa", studentIDS[randomID].id)
 
         const winner = await pool.query("SELECT * FROM users WHERE id = $1", [studentIDS[randomID].id])
         console.log('winner', winner)
