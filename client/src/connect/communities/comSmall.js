@@ -42,7 +42,7 @@ export default function SmallGroups({group}) {
             <div className='w-1/12 mt-4 mx-2'>
                 <Link to = {`/communitie/${group.id}`}>
                     <div className="card w-96 bg-base-100 shadow-xl">
-                    <figure>{group.groupimage === "" ? <img src = {'Logo'}/> : <img className='w-1/4 bg-cover bg-info'  src = {`/img/${group.groupimage}`}></img>}</figure>
+                    <figure>{group.groupimage === "" ? <img src = {'Logo'}/> : <img className='w-1/4 bg-cover'  src = {group.groupimage}></img>}</figure>
                     <div className="card-body">
                         <h2 className="card-title">{group.groupTitle}</h2>
                         <p>{group.groupDescription}</p>
