@@ -257,9 +257,12 @@ app.post("/givepoints",  async(req,res) => {
 app.post("/resetPoints", async(req,res) => {
 
     try {
-        const ids = await pool.query("SELECT id FROM users")        
+        const ids = await pool.query("SELECT id FROM users")
+        console.log("IDSss", ids)        
         for(let i = 0; i<ids.length; i++){
             const updateUser =  await pool.query("UPDATE users SET points = 0 WHERE id = $1 ", [ids[i].id])
+            console.log("UPDAETING USER", i)
+            console.log('dsadas', ids[i].id)
         }
     
         res.json('ok')
