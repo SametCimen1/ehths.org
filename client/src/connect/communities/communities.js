@@ -33,7 +33,7 @@ export default function Groups() {
 
     const getMyGroups = async()=> {
       const data = await fetch("/user/getMyGroups", {
-        method:"GET",
+        method:"POST",
         headers: {
           'Content-Type': 'application/json'
         },
@@ -51,7 +51,7 @@ export default function Groups() {
 
     const getDefaultGroups = async() => {
      const data = await fetch("/user/getGroups", {
-        method:"GET",
+        method:"POST",
         headers: {
           'Content-Type': 'application/json'
         },
