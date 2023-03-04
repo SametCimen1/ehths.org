@@ -300,7 +300,7 @@ app.post('/getnine', async(req,res) => {
         }else if(winner.rows[0].points< 100){
             winner.rows[0].reward = "Wawa Gift Card ($50)"
         }else{
-            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate"
+            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate + Amazon gift card ($75)"
         }
 
         res.json(winner.rows[0])        
