@@ -148,14 +148,13 @@ export default function LongGroups() {
 
                     <div className='flex items-center mt-3'>
                             <div c>
-                                <img className='clubPicture rounded-xl' src = {`/img/${group.groupImage}`}></img>
+                                <img className='clubPicture rounded-xl' src = {group.groupImage}></img>
 
                                 {!group.amIMember && <button>Join</button> }
                             </div>
 
-                            <div className='ml-2'>
-                                <p className='font-bold text-2xl'>g/ {group.groupName}</p>
-                                <p className='font-bold text-xl'>{group.groupTitle}</p>
+                            <div className='ml-2 w-1/2'>
+                                <p className='font-bold  text-xl'>{group.groupTitle}</p>
                                 <p className='font-normal'>{group.groupName}</p>
                             </div>
                     </div>

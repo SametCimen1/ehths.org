@@ -195,7 +195,7 @@ export default function BigCommunicate() {
               <div >
                  
                    <div >
-                       {image === "" ? <img  alt = "user profile " className = {` ${"profileImg"}`} src = {'Logo'}></img> : <img alt = "user profile "  className = {` ${"profileImg"}`} src = {`/img/${image}`}></img>}
+                       {image === "" ? <img  alt = "user profile " className = {` ${"profileImg"}`} src = {'Logo'}></img> : <img alt = "user profile "  className = {` ${"profileImg"}`} src = {post.image}></img>}
                        <p onClick = {()=> navigate(`/user/${post.userid}`)}>u/{name}</p>
 
                    </div>

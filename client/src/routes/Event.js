@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom';
 import { Link,useSearchParams  } from "react-router-dom";
 import { useNavigate  } from "react-router-dom";
+
 const Event = () => {
   const{ id } = useParams();
   const [event, setEvent] = useState(undefined)
@@ -9,10 +10,11 @@ const Event = () => {
   const [people, setPeople] = useState([])
   const navigate = useNavigate();
   const [points, setPoints] = useState(0)
+  const [pointArr, setPointArr] = useState([1]);
+  const [checked, setChecked] = useState(false)
 
 
   const getEvent = async() => {
-  
     const data = await fetch("/getEvent", {
       method:"POST",
         headers: {
@@ -53,38 +55,40 @@ const Event = () => {
 
   }
 
-  const givePoint = [];
+
 
   const givePoints = async() => {
-    console.log('give point', givePoint)
-    console.log(' eventPoint', points)
-    const data = await fetch("/givepoints", {
-      method:"POST",
-      headers: {
-      'Content-Type': 'application/json'
-      },
-      redirect: 'follow',
-      credentials: 'include',
-      body: JSON.stringify({
-        givePoint,
-        eventPoint:points
-      })
-    })
+    if(checked === false){
+      alert("you did not give points to anyone")
+    }else{
+        const data = await fetch("/givepoints", {
+          method:"POST",
+          headers: {
+          'Content-Type': 'application/json'
+          },
+          redirect: 'follow',
+          credentials: 'include',
+          body: JSON.stringify({
+            givePoint:pointArr,
+            eventPoint:points
+          })
+        })
 
-    const pastEvent = await fetch("/makepastevent", {
-      method:"POST",
-      headers: {
-      'Content-Type': 'application/json'
-      },
-      redirect: 'follow',
-      credentials: 'include',
-      body: JSON.stringify({
-        id
-      })
-    })
-    alert('succesfully gave points, page is going to be refreshed')
-    navigate('/dashboard')
-    window.location.reload(true)
+        const pastEvent = await fetch("/makepastevent", {
+          method:"POST",
+          headers: {
+          'Content-Type': 'application/json'
+          },
+          redirect: 'follow',
+          credentials: 'include',
+          body: JSON.stringify({
+            id
+          })
+        })
+        alert('succesfully gave points, page is going to be refreshed')
+        navigate('/dashboard')
+        window.location.reload(true)
+  }
 
   }
   useEffect(() => {
@@ -128,7 +132,7 @@ const Event = () => {
                         
                       <div className = "flex items-center">
                           <label>Attanded</label>
-                          <input type = "checkbox" className='mr-4 ml-1' placeholder='' onChange= {() => {givePoint.push(user.id); console.log('ummser',user)}}></input>
+                          <input type = "checkbox" className='mr-4 ml-1' placeholder='' onChange= {() => setChecked(!checked) } ></input>
                           <button className = "mx-4 btn bg-red-500 hover:bg-red-700">Remove</button>
                       </div>
 

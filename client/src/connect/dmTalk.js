@@ -47,7 +47,7 @@ export default function DmTalk() {
           });
           const response = await data.json();
           console.log("PORT NUMBER", response)
-          setPORT("/");
+          setPORT("localhost:5000");
       }
 
     useEffect(()=>{

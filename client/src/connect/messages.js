@@ -9,9 +9,17 @@ export  default function Messages({messages}){
         <div>
            {messages.map((elem) => {
                 return(
-                   <div >
-                      <p>{elem.user}:</p>
-                      <p >{elem.text}</p>
+                   <div className=''>
+                        
+                        <div class="chat chat-start">
+                        
+                           <div class="chat-header">
+                              {elem.user}
+                           </div>
+                           <div class="chat-bubble text-black">{elem.text}</div>                        
+                        
+                        </div>
+
                    </div>
                 ) 
            })}

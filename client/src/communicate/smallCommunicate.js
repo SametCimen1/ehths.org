@@ -135,7 +135,7 @@ export default function SmallCommunicate({post, type}) {
                                             {isItMine && <i onClick = {()=> deletePost()} className ={`${"fas fa-trash-alt"} `}></i>}
 
                                             <div className='w-full'  onClick = {()=> navigate(`/connect/communicate/post?post=${type}&id=${post.id}`)} >
-                                                    <div className='flex items-center w-full justify-center'>
+                                                    <div className='flex items-center w-full justify-start px-4 mt-1'>
                                                         {img === "" ?<img alt = "user profile" className = {`${"profileImg rounded-full"}`} src = {'Logo'}></img>: <img  alt = "user profile"  className = {`${"profileImg rounded-full userPicture"}`} src = {`/img/${img}`}></img>}
                                                         {typeof post.groupname !== 'undefined'? <p className='font-bold ml-2'>c/{post.groupname}  u/{name}</p> : <p>u/{name}</p>}
 
@@ -150,19 +150,7 @@ export default function SmallCommunicate({post, type}) {
                                         </div>  
 
 
-                                        <div className='flex justify-around'>
-                                                        <div onClick = {()=> navigate(`/connect/communicate/post?post=${type}&id=${post.id}`)} >
-                                                          <i  className={`${'fas fa-comments'} `}></i>
-                                                          <p>{post.comments} comments</p>
-                                                        </div>
-                                                          <div >
-                                                          <i onClick = {() => likePost()}  className={`${"fas fa-thumbs-up"} ${post.didILike ? 'style.likes' : 'style.like'}`}></i>
-                                                            {/* {post.didILike ? <p className = {style.liked}>{post.likes} likes</p> : <p className = {style.like}> {post.likes} likes</p> }
-                                                            {post.didILike ? <p className = {style.liked}>{post.likes} likes</p> : <p className = {style.like}> {post.likes} likes</p> } */}
-                                                           <p>{post.likes} likes</p>
-                                                        </div>
-   
-                                        </div>
+
 
 
                 </div>

@@ -193,6 +193,19 @@ const Admin = () => {
         setWinner(winner)
     }
     
+    const getMost = async() => {
+        const winner = students[0]
+        if(winner.points < 20){
+            winner.reward = "Pencil + Eraser"
+        }else if(winner.points < 50){
+            winner.reward = "School Pants ($20)"
+        }else if(winner.points< 100){
+            winner.reward = "Wawa Gift Card ($50)"
+        }else{
+            winner.reward = "Egg Harbor Township High School volunteer certificate + Amazon gift card ($75)"
+        }
+        setWinner(winner);
+    }
 
 
     const resetPoints = async() => {
@@ -377,15 +390,15 @@ const Admin = () => {
 
 
                         
-                        <div>
+                        <div className='mb-2'>
                             <div className='text-center justify-center flex items-center mt-10'>
                                 <p className='font-bold text-xl'>Pick a random winner</p>
                             </div>
 
                             <div className='flex justify-center w-full wrap'>
 
-                                <label htmlFor="my-modal" className='btn border-2 text-black  border-blue-400  hover:bg-blue-500 w-1/5' onClick={() => get9()}>Award the student with the top points</label>
-                                <label htmlFor="my-modal" className='btn bg-blue-400 ml-2   hover:bg-blue-500 w-1/5' onClick={() => get9()}>Pick a random winner from 9th grade</label>
+                                <label htmlFor="my-modal" className='btn bg-blue-400 ml-2 hover:bg-blue-500 w-1/5' onClick={() => getMost()}>Award the student with the top points</label>
+                                <label htmlFor="my-modal" className='btn bg-blue-400 ml-2 hover:bg-blue-500 w-1/5' onClick={() => get9()}>Pick a random winner from 9th grade</label>
                                 <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get10()}>Pick a random winner from 10th grade</label>
                                 <label htmlFor="my-modal" className='ml-2 btn bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get11()}>Pick a random winner from 11th grade</label>
                                 <label htmlFor="my-modal" className='ml-2 btn mt-2 bg-blue-400 hover:bg-blue-500 w-1/5' onClick={() => get12()}>Pick a random winner from 12th grade</label>

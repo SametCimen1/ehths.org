@@ -4,25 +4,6 @@ import {useEffect, useState} from 'react';
 import SmallGroup from './comSmall'
 
 export default function Groups() {
-  const [csrf, setCsrf] = useState("")
-
-
-    const getcsrf = async() => {
-      const data = await fetch("/user/getcsrf", {
-        method:"GET",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        credentials: 'include',
-      });
-      const response = await data.json();
-      setCsrf(response)
-    }
-
-    useEffect(()=>{
-      getcsrf()
-    },[])
 
     const [groups, setGroups] = useState([]);
     const [myGroups, setMyGroups] = useState([]);
@@ -64,6 +45,7 @@ export default function Groups() {
     useEffect(()=>{
      getMyGroups();
      getDefaultGroups();
+     loadMore("groups")
     },[])
 
 
@@ -87,6 +69,7 @@ export default function Groups() {
         
         const response = await data.json();
         console.log("RESPONSE")
+
         if(response.length === 0){
           alert("no more community avaible")
         }
@@ -104,6 +87,7 @@ export default function Groups() {
 
       }
       else if (type === 'groups'){
+        console.log("SENDING REQUIEST GROUPS")
         const data = await fetch("/posts/getmoregroups",{
           method:"PUT",
           headers: {
@@ -117,17 +101,21 @@ export default function Groups() {
           })
         })
         const response = await data.json();
+        console.log("RESPONSE FROM COMMUNITIES", response)
         if(response.length === 0){
           alert("no more post avaible")
         }
         else{
           const newArr = [];
           for(let i = 0; i< groups.length; i ++){
-              newArr.push(groups[i])
+            console.log("PUSHING IT ",groups[i] )  
+            newArr.push(groups[i])
           }
           for(let i =  0; i<response.length; i ++){
+            console.log("PUSHING NEW ",response[i] ) 
             newArr.push(response[i])
         }
+        console.log("NEW ARR BEFORE PUSHING", newArr)
         setGroups(newArr)
        }
         
@@ -151,7 +139,6 @@ export default function Groups() {
                       action='/user/makegroup' 
                       method='post' 
                       encType="multipart/form-data">
-                      <input type = "hidden" name ="_csrf" value={csrf}></input>
 
                       <div>
                           <p>Group Name</p>
@@ -234,20 +221,18 @@ export default function Groups() {
                         </div>
 
                         <div >
-                         {groups.length >  0 ?  
+                         {(groups !== [] && groups.length >  0) ?  
                          
 
                          <div >
                           {groups.map((group) => {
-                             if (smallestGroupIndex > group.id ){
-                              smallestGroupIndex = group.id;  
-                            }
 
                             return(
                               <SmallGroup group = {group}></SmallGroup>
                             )
+
                           })}
-                          <button className='btn btn-ghost' onClick = {() => loadMore("groups")} >Load More</button>
+                          <button className='btn btn-ghost mt-2' onClick = {() => loadMore("groups")} >Load More</button>
                          </div>
                          
                          : <h1 className = "noFriends">No groups avaible right now</h1>}

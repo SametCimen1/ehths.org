@@ -242,9 +242,11 @@ app.post("/getPeopleSignedUp",  async(req,res) => {
 })
 app.post("/givepoints",  async(req,res) => {
     const givePoint = req.body.givePoint
+    console.log("GIVE POINT", givePoint)
     console.log("GIVE POINT", req.body.givePoint)
     console.log("GIVE POINT", typeof(givePoint))
-    console.log("GIVE POINT", givePoint)
+    console.log("GIVE POINT POINT", req.body.point)
+
     for(let i = 0; i<givePoint.length; i++){
         const getUser =  await pool.query("SELECT * FROM users WHERE id = $1 ", [givePoint[i]])
         let point = Number(getUser.rows[0].points) + Number(req.body.eventPoint);
@@ -258,11 +260,10 @@ app.post("/resetPoints", async(req,res) => {
 
     try {
         const ids = await pool.query("SELECT id FROM users")
-        console.log("IDSss", ids)        
+     
         for(let i = 0; i<ids.rowCount; i++){
             const updateUser =  await pool.query("UPDATE users SET points = 0 WHERE id = $1 ", [ids.rows[i].id])
-            console.log("UPDAETING USER", i)
-            console.log('dsadas', ids[i].id)
+            console.log("UPDAETING USER", ids)
         }
     
         res.json('ok')
@@ -324,7 +325,7 @@ app.post('/getten', async(req,res) => {
         }else if(winner.rows[0].points< 100){
             winner.rows[0].reward = "Wawa Gift Card ($50)"
         }else{
-            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate"
+            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate + Amazon gift card ($75)"
         }
         res.json(winner.rows[0])        
 
@@ -347,7 +348,7 @@ app.post('/geteleven', async(req,res) => {
         }else if(winner.rows[0].points< 100){
             winner.rows[0].reward = "Wawa Gift Card ($50)"
         }else{
-            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate"
+            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate + Amazon gift card ($75)"
         }
         res.json(winner.rows[0])        
 
@@ -370,7 +371,7 @@ app.post('/gettwelve', async(req,res) => {
         }else if(winner.rows[0].points< 100){
             winner.rows[0].reward = "Wawa Gift Card ($50)"
         }else{
-            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate"
+            winner.rows[0].reward = "Egg Harbor Township High School volunteer certificate + Amazon gift card ($75)"
         }
         res.json(winner.rows[0])        
 
@@ -509,7 +510,7 @@ const getUserIndex = async(req, res) => {
 
 app.use('/user', verifyToken,user);
 app.use('/auth', auth);
-app.use('/posts', verifyToken, posts);
+app.use('/posts', posts);
 
 io.on('connection',(socket) => {
   

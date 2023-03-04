@@ -31,6 +31,7 @@ export default function Signin() {
         
         if(data.status === 200){
             navigate('/')
+            window.location.reload(true)
         }
         else{
             setResponse(response)
