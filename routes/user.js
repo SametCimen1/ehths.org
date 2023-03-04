@@ -622,7 +622,7 @@ router.get("/getMyGroups", async(req,res) => {
     for(let i =0; i< group.rowCount; i++){
         const obj = {
             id:group.rows[i].id,
-            didIJoin:group.rows[i].members.includes(req.user._id),
+            didIJoin:group.rows[i].members.includes(userid),
             groupname: group.rows[i].groupname,
             memberCount:group.rows[i].members.length,
             groupTitle: group.rows[i].grouptitle,

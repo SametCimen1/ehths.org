@@ -16,7 +16,7 @@ export default function DmTalk() {
     const name = spacedName.replaceAll("_", " ")
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("")
-    const [PORT, setPORT] = useState("localhost:5000")
+    const [PORT, setPORT] = useState("/")
 
 
 
@@ -47,7 +47,7 @@ export default function DmTalk() {
           });
           const response = await data.json();
           console.log("PORT NUMBER", response)
-          setPORT(response);
+          setPORT("/");
       }
 
     useEffect(()=>{
@@ -147,7 +147,7 @@ export default function DmTalk() {
 
             <div>
                {/* <Messages messages = {messages}></Messages> */}
-               <div>
+               <div className='mt-2 w-4/5 bg-gray-100'>
                 {
                     (messages.length > 0 || typeof messages !== 'undefined')  ? <Messages messages = {messages}></Messages> : <h1>No messages</h1> 
                 }
@@ -155,8 +155,8 @@ export default function DmTalk() {
             </div>
             
 
-            <div>
-                <input className = "border-2 border-gray-200 p-2" type = "text" placeholder='type here' onChange = {(e) => setMessage(e.target.value)} onKeyPress = {(e)=> e.key === 'Enter' ? sendMessage(e) : null}></input>
+            <div className='mt-5'>
+                <input className = "border-2 border-gray-200 p-2 w-4/5" type = "text" placeholder='type here' onChange = {(e) => setMessage(e.target.value)} onKeyPress = {(e)=> e.key === 'Enter' ? sendMessage(e) : null}></input>
                 <button className='btn bg-blue-500 hover:bg-blue-700' onClick = {(e) => sendMessage(e)}>Send</button>
             </div>
 

@@ -355,11 +355,10 @@ const Admin = () => {
                                 {(events !== undefined && eventsHide === false) && events.map((elem) => {
                                     return(
                                         <div className='w-1/4 mt-4 mx-2'>
-                                        <Link to = {`/club/${elem.id}`}>
+                                        <Link>
                                           <div className="card w-96 bg-base-100 shadow-xl">
-                                          <figure><img src = {elem.picture} alt="Club Picture" /></figure>
                                           <div className="card-body">
-                                              <h2 className="card-title">{elem.name}</h2>
+                                              <h2 className="card-title">{elem.header}</h2>
                                               <p className='text-left'>{elem.description}</p>
                                               {/* <div className="flex justify-between items-center">
                                                   <button className="btn btn-primary">Visit</button>
