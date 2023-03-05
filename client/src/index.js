@@ -26,6 +26,9 @@ import DmTalk from './connect/dmTalk'
 import Groups from './connect/communities/communities'
 import LongGroups from './connect/communities/comLong'
 import MakeFriends from './connect/makeFriends'
+import ClubBenefits from './routes/ClubBenefits'
+import Copyright from './routes/Copyright';
+import Libraries from './routes/Libraries';
 // import Communicate from './communicate/communicate';
 // import BigCommunicate from './communicate/bigCommunicate'
 
@@ -66,6 +69,10 @@ const router = createBrowserRouter([
     path: "/connect/dm/to/:spacedName",
     element: <DmTalk></DmTalk>
   },
+  {
+    path:"/clubbenefits",
+    element: <ClubBenefits></ClubBenefits>
+  },
   // {
   //   path: "/connect/communicate",
   //   element: <Communicate></Communicate>
@@ -87,6 +94,14 @@ const router = createBrowserRouter([
   {
     path: "/connect/makefriends",
     element: <MakeFriends></MakeFriends>
+  },
+  {
+    path: "/copyright",
+    element: <Copyright></Copyright>
+  },
+  {
+    path: "/libraries",
+    element: <Libraries></Libraries>
   },
   {
     path: "/admin",

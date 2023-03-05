@@ -355,10 +355,15 @@ export default function Profile() {
               >
                 My Posts
               </li>
+            
+            {user.role === 'admin' &&<a  href = "/admin" className= {`mx-2 cursor-pointer btn  text-black ${selected === "admin" ? "bg-blue-500 hover:bg-blue-700" : "bg-gray-300"}`} onClick={() => {setSelected("admin");getFriends();}}>Admin</a>}
             </ul>
           </div>
     
-          {selected === "friendRequests" && (
+         
+
+
+          {selected === "admin" && (
             <div>
               <h2 className='font-bold text-2xl'>Friend requests</h2>
     
@@ -398,6 +403,7 @@ export default function Profile() {
               </div>
             </div>
           )}
+
     
           {selected === "editProfile" && (
             <div>
@@ -412,7 +418,7 @@ export default function Profile() {
                   encType="multipart/form-data"
                 >
                   <div>
-                    <p className='block text-gray-500 text-sm'>Update Abot</p>
+                    <p className='block text-gray-500 text-sm'>Update About</p>
                     <div className=''>
     
                       <input

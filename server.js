@@ -334,6 +334,17 @@ app.post('/getten', async(req,res) => {
         res.json(false)
     }
 })
+app.post('/removeStudent', async(req,res) => {
+    try {
+        const studentId = req.body.studentId
+        const data = await pool.query("DELETE FROM users WHERE id = $1", [studentId])
+        res.json('ok')
+    } catch (error) {
+        console.log("ERROR COCRUERD", error)
+        res.json('false')
+    }
+})
+
 
 app.post('/geteleven', async(req,res) => {
     try {

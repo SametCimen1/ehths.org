@@ -12,8 +12,7 @@ const Footer = () => {
                   <div className='md:w-33 mt-3 md:mt-0'>
                       <h5 className='text-white text-2xl font-bold'>Copyright & Libraries</h5>
                       <ul className='text-muted navbar-nav'>
-                          <li className=''><a className='text-gray-400' href = "/termsofuse">Copyright</a></li>
-                          <li><a className='text-gray-400' href = "/privacy">Libraries used</a></li>
+                          <li className=''><a className='text-gray-400' href = "/libraries">Copyright & Libraries</a></li>
                       </ul>
                   </div>
   
@@ -21,7 +20,7 @@ const Footer = () => {
                   <div className='md:w-33 mt-3 md:mt-0'>
                       <h5 className='text-white display-20 text-2xl font-bold'>Contact us</h5>
                       <ul className='text-muted navbar-nav'>
-                          <li className=''><a className=' text-gray-400 text-decoration-none' href = "/">Send us an E-Mail</a></li>
+                          <li className=''><a className=' text-gray-400 text-decoration-none' href = "mailto:cimensamet338@gmail.com">Send us an E-Mail</a></li>
                           <div className='flex justify-center'>
                               <img src = "images/twitter.svg"></img>
                               <img src = "images/instagram.svg"></img>

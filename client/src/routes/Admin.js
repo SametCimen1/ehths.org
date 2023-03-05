@@ -225,6 +225,30 @@ const Admin = () => {
             alert("Error occured please try again later")
         }
     }
+
+
+    const removeStudent = async (studentId)=>{
+        const data = await fetch("/removeStudent", {
+            method:"POST",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            credentials: 'include',
+            body: JSON.stringify({
+                studentId
+            })
+        })
+        const res = await data.json();
+        if(res === 'ok'){
+            alert("Succesfully removed the student")
+            window.location.reload(true)
+        }
+        else{
+            alert("Error occured please try again later")
+        }
+    }
+ 
     return (
         <div>
             
@@ -346,8 +370,7 @@ const Admin = () => {
                                                     </div>
 
                                                     <div className='flex w-1/3'>
-                                                        <button className='btn bg-blue-500 mr-4 hover:bg-blue-700' onClick={() => {}}>Edit Information</button>
-                                                        <button className='btn bg-red-500 hover:bg-red-700'onClick={() => {}}>Remove</button>
+                                                        <button className='btn bg-red-500 hover:bg-red-700'onClick={() => {removeStudent(friend.id)}}>Remove</button>
                                                     </div>
 
                                                 </div>

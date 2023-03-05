@@ -11,9 +11,9 @@ const Home = () => {
     let navigate  = useNavigate();
 
     const images = [
-        "slide1.png",
-        "slide2.jpg",
-        "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+        "https://townsquare.media/site/396/files/2017/10/High-School.jpg?w=980&q=75",
+        "https://scontent-lga3-1.xx.fbcdn.net/v/t39.30808-6/239247354_904447256837899_6646704184363486046_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=e3f864&_nc_ohc=prYaIHvfhr0AX9nXirJ&_nc_ht=scontent-lga3-1.xx&oh=00_AfASfdscP2N3f5tKVOrPUUgxNBV7vq9kGXxgOCwLvS6mJQ&oe=64082870",
+        "https://cdnsm5-ss13.sharpschool.com/UserFiles/Servers/Server_252384/Image/1%20HS%20BANNER.png",
     ];
     const [events, setEvents] = useState([])
 

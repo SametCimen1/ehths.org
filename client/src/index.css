@@ -57,3 +57,7 @@ code {
 [data-theme="black"] p{
   color: rgb(168, 168, 168)
 }
+
+.thirtyPercent{
+  width: 30%;
+}

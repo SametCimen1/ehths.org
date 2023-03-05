@@ -130,22 +130,16 @@ const Layout = ({children}) => {
                 </div>
                 : 
                 <div className='flex items-center justify-between'>
-                  {!loggedIn && 
-                    <div c>
-                      <a className = "text-white nav-link mx-3 " href = "/">Sports</a>
-                    </div>
-                  }
-
 
                   {!loggedIn && 
                     <div>
-                      <a className = "text-white nav-link mx-3" href = "/">Events</a>
+                      <a className = "text-white nav-link mx-3" href = "/clubs">Events</a>
                     </div>
                   }
 
                     {!loggedIn && 
                     <div>
-                      <a className = "text-white nav-link mx-3" href = "/">clubs</a>
+                      <a className = "text-white nav-link mx-3" href = "/clubs">Clubs</a>
                     </div>
                   }
 

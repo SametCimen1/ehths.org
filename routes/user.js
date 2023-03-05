@@ -13,7 +13,7 @@ router.post('/getUser', async(req,res) => {
     const user = req.user;
     console.log(user)
     if(user){
-        const data = await pool.query("SELECT add_id, name, email, ownimg, image, role, points FROM users WHERE id = $1", [user._id]);
+        const data = await pool.query("SELECT add_id, name, email, ownimg, image, role, about, points FROM users WHERE id = $1", [user._id]);
         console.log("USER EXIST SENDING", data.rows[0])
         return res.status(200).json(data.rows[0]);
     }
@@ -330,19 +330,22 @@ router.get("/getcsrf", csrfProtection, async(req,res) => {
 
 router.post("/updateData", async(req,res) => {
     const user = req.user;
-    if(user){
+    const userid = await getUserIndex(req);
+    console.log("USERID", req.files)
+    console.log("USERID", req.body.about)
+    if(userid){
         if((req.files && Object.keys(req.files).length !== 0) && req.body.about ===""){ 
-            uploadImg(req.files,user._id)
+            uploadImg(req.files, userid)
 
             }
-            else if (req.files === null && req.body.about !==""){
-
-                const data = await pool.query("UPDATE users SET about = $1 WHERE id = $2", [req.body.about, user._id])
+            else if (req.files == null && req.body.about !==""){
+                console.log("UPDATING ABOUT")
+                const data = await pool.query("UPDATE users SET about = $1 WHERE id = $2", [req.body.about, userid])
             }
             else if((req.files && Object.keys(req.files).length !== 0) && req.body.about !==""){
       
-                const data = await pool.query("UPDATE users SET about = $1 WHERE id = $2", [req.body.about, user._id])
-                uploadImg(req.files,user._id)
+                const data = await pool.query("UPDATE users SET about = $1 WHERE id = $2", [req.body.about, userid])
+                uploadImg(req.files,userid)
             }
             
             res.redirect(`/profile`);
